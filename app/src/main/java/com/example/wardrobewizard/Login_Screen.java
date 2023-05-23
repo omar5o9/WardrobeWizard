@@ -33,8 +33,8 @@ public class Login_Screen extends AppCompatActivity {
         setContentView(R.layout.login_screen);
 
         //views are initialized using their respective IDs from the XML layout using findViewById
-        editTextEmail = findViewById(R.id.editTextEmail);
-        editTextPassword = findViewById(R.id.editTextPassword);
+        editTextEmail = findViewById(R.id.editTextTextEmailAddress);
+        editTextPassword = findViewById(R.id.editTextTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
         textViewRegister = findViewById(R.id.textViewRegister);
 
@@ -57,7 +57,7 @@ public class Login_Screen extends AppCompatActivity {
             public void onClick(View v) {
                 // Handle the click event for the "No Account yet? Create One" TextView
                 // Perform the action you want, such as navigating to the registration page
-                Intent intent = new Intent(Login_Screen.this, regstration_screen.class);
+                Intent intent = new Intent(Login_Screen.this, Register_Screen.class);
                 startActivity(intent);
             }
         });
@@ -82,8 +82,6 @@ public class Login_Screen extends AppCompatActivity {
     //If the validation succeeds, the loginUser method
     // is called to authenticate the user using Firebase Authentication.
     private void loginUser(String email, String password) {
-
-
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
