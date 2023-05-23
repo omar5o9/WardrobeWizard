@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="tn.qmed.custombutton.MainActivity">
+    tools:context="com.example.wardrobewizard.Login_Screen">
 
     <TextView
         android:layout_width="match_parent"
@@ -22,13 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:text="User name"
+        android:text="Email"
         android:textColor="@color/black" />
 
     <EditText
+        android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginHorizontal="30dp" />
 
     <TextView
@@ -39,6 +39,7 @@
         android:textColor="@color/black" />
 
     <EditText
+        android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -48,6 +49,7 @@
         android:paddingVertical="20dp" />
 
     <Button
+        android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -57,6 +59,7 @@
         android:textColor="@color/white" />
 
     <TextView
+        android:id="@+id/textViewRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
