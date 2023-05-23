@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+/.idea/.name
+/app/Google FireBase
+/app/src/main/google-services.json
+/WardrobeWizard/app/google-services.json

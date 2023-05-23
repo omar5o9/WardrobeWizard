@@ -57,7 +57,7 @@ public class Login_Screen extends AppCompatActivity {
             public void onClick(View v) {
                 // Handle the click event for the "No Account yet? Create One" TextView
                 // Perform the action you want, such as navigating to the registration page
-                Intent intent = new Intent(Login_Screen.this, RegistrationActivity.class);
+                Intent intent = new Intent(Login_Screen.this, regstration_screen.class);
                 startActivity(intent);
             }
         });
