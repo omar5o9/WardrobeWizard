@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/add_clothes">
+
+    <fragment
+        android:id="@+id/add_clothes"
+        android:name="com.example.wardrobewizard.add_clothes"
+        android:label="fragment_add_clothes"
+        tools:layout="@layout/add_clothes" />
+    <fragment
+        android:id="@+id/viewCloset"
+        android:name="com.example.wardrobewizard.viewCloset"
+        android:label="fragment_view_closet"
+        tools:layout="@layout/closet" />
+    <fragment
+        android:id="@+id/settingsFrag"
+        android:name="com.example.wardrobewizard.settingsFrag"
+        android:label="fragment_settings"
+        tools:layout="@layout/settings" />
+</navigation>

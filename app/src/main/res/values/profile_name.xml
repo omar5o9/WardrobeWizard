@@ -1,0 +1,3 @@
+<![CDATA[
+    Username: ${email.substringBefore("@")}
+]]>
