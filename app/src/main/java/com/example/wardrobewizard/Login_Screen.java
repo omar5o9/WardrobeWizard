@@ -96,7 +96,7 @@ public class Login_Screen extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Authentication successful
-                            Intent intent = new Intent(Login_Screen.this, HomepageActivity.class);
+                            Intent intent = new Intent(Login_Screen.this, homepage.class);
                             startActivity(intent);
                             finish(); // Optional: Finish the login activity to prevent the user from going back
                         } else {
