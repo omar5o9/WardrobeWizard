@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     tools:menu="@menu/bottom_menu">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="408dp"
-        android:layout_height="110dp"
-        app:menu="@menu/bottom_menu"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="781dp" />
-
     <TextView
         android:id="@+id/header"
         android:layout_width="wrap_content"
@@ -20,6 +13,6 @@
         android:text="TextView"
         android:textSize="34sp"
         tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="59dp"
+        tools:layout_editor_absoluteY="135dp"
         tools:text="Privacy Policy" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/headerDeleteAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="94dp"
+        tools:text="Delete Account" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="343dp"
+        android:layout_height="41dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="221dp"
+        tools:text="Are You Sure You Want To Delete Your Account?" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="360dp"
+        android:layout_height="76dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="592dp"
+        tools:text="Deleting your account will permanetly delete everything. There is no way to recover a deleted account." />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="553dp"
+        tools:text="Disclaimer" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="138dp"
+        android:layout_height="63dp"
+        android:background="@drawable/button_bg"
+        android:text="Delete Account"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="342dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
