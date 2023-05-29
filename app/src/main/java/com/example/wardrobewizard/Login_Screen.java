@@ -45,8 +45,8 @@ public class Login_Screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Handle login button click
-                String email = editTextEmail.getText().toString();
-                String password = editTextPassword.getText().toString();
+                String email = editTextEmail.getText().toString().trim();
+                String password = editTextPassword.getText().toString().trim();
                 // Validate the login credentials
                 if (validateCredentials(email, password)) {
                     // Perform the login process

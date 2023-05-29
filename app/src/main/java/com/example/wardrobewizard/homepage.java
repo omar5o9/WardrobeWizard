@@ -3,7 +3,6 @@ package com.example.wardrobewizard;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -36,6 +35,7 @@ public class homepage extends AppCompatActivity {
             laundryImageButton = findViewById(R.id.laundryBasket);
             calendarImageButton = findViewById(R.id.calendarPic);
             statsImageButton = findViewById(R.id.Stats);
+            editProfileTextView = findViewById(R.id.editProfile);
 
             BottomNavigationView bottomNavigationView = findViewById(R.id.bottomMenu);
             bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
