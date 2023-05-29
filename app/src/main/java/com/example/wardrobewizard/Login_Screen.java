@@ -21,6 +21,7 @@ public class Login_Screen extends AppCompatActivity {
     private EditText editTextPassword;
     private Button buttonLogin;
     private TextView textViewRegister;
+    private TextView textViewForgotPassword;
 
 
     @Override
@@ -37,6 +38,7 @@ public class Login_Screen extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
         textViewRegister = findViewById(R.id.textViewRegister);
+        textViewForgotPassword = findViewById(R.id.forgotPassword);
 
         //click listener is set, which triggers the login process when the button is clicked.
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +64,14 @@ public class Login_Screen extends AppCompatActivity {
             }
         });
 
+        textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the click event for the "Forgot Password" TextView
+                Intent intent = new Intent(Login_Screen.this, Forgot_Password.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //perform basic validation
@@ -101,7 +111,7 @@ public class Login_Screen extends AppCompatActivity {
                             finish(); // Optional: Finish the login activity to prevent the user from going back
                         } else {
                             // Authentication failed, show an error message or handle the failure case
-                            Toast.makeText(Login_Screen.this, "Authentication failed.",
+                            Toast.makeText(Login_Screen.this, "Invalid Login.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
