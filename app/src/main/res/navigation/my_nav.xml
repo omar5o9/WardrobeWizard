@@ -3,21 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/add_clothes">
+    app:startDestination="@id/homepage">
 
     <fragment
-        android:id="@+id/add_clothes"
+        android:id="@+id/homepage"
+        android:name="com.example.wardrobewizard.homepage"
+        android:label="fragment_homepage"
+        tools:layout="@layout/homepage" />
+
+    <fragment
+        android:id="@+id/addClothesButton"
         android:name="com.example.wardrobewizard.add_clothes"
         android:label="fragment_add_clothes"
         tools:layout="@layout/add_clothes" />
     <fragment
-        android:id="@+id/viewCloset"
-        android:name="com.example.wardrobewizard.viewCloset"
+        android:id="@+id/closetButton"
+        android:name="com.example.wardrobewizard.closet"
         android:label="fragment_view_closet"
         tools:layout="@layout/closet" />
     <fragment
-        android:id="@+id/settingsFrag"
-        android:name="com.example.wardrobewizard.settingsFrag"
+        android:id="@+id/settingsButton"
+        android:name="com.example.wardrobewizard.settings_screen"
         android:label="fragment_settings"
         tools:layout="@layout/settings" />
 </navigation>

@@ -3,22 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bottomMenu"
         android:title="home"
         android:icon="@drawable/ic_home" />
 
     <item
-        android:id="@+id/viewCloset"
+        android:id="@+id/closetButton"
         android:icon="@drawable/ic_closet"
         android:title="Closet"/>
 
     <item
-        android:id="@+id/add_clothes"
+        android:id="@+id/addClothesButton"
         android:title="Add"
         android:icon="@drawable/ic_add" />
 
     <item
-        android:id="@+id/settingsFrag"
+        android:id="@+id/settingsButton"
         android:title="Settings"
         android:icon="@drawable/ic_settings" />
 

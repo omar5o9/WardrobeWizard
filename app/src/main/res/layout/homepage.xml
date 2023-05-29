@@ -7,68 +7,98 @@
     android:background="@color/black">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="413dp"
-        android:layout_height="94dp"
+        android:id="@+id/bottomMenu"
+        android:layout_width="395dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="15dp"
         android:background="#8CFFFFFF"
-        app:menu="@menu/bottom_menu"
-        tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="801dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:menu="@menu/bottom_menu" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/header_homepage"
         android:layout_width="387dp"
-        android:layout_height="112dp"
+        android:layout_height="101dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="34sp"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/profilePic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Wardrobe Wizard" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/Stats"
         android:layout_width="121dp"
         android:layout_height="133dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="50dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/stats"
-        tools:layout_editor_absoluteX="221dp"
-        tools:layout_editor_absoluteY="515dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/laundryBasket"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:srcCompat="@drawable/stats" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/calendarPic"
         android:layout_width="117dp"
         android:layout_height="136dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="50dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/calendar"
-        tools:layout_editor_absoluteX="225dp"
-        tools:layout_editor_absoluteY="290dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/outfitsPic"
+        app:layout_constraintTop_toBottomOf="@+id/profileName"
+        app:srcCompat="@drawable/calendar" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/profilePic"
         android:layout_width="85dp"
         android:layout_height="82dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="82dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/profile_pic"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="127dp" />
+        app:layout_constraintBottom_toTopOf="@+id/outfitsPic"
+        app:layout_constraintEnd_toStartOf="@+id/editProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_homepage"
+        app:srcCompat="@drawable/profile_pic" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="163dp"
+        android:layout_marginBottom="10dp"
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="135dp"
+        app:layout_constraintBottom_toTopOf="@+id/editProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profilePic"
+        app:layout_constraintTop_toBottomOf="@+id/header_homepage"
         tools:text="Profile Name" />
 
     <TextView
-        android:id="@+id/textViewRegister"
+        android:id="@+id/editProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="696dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="592dp"
         android:baselineAligned="false"
         android:text="Edit Profile"
         android:textAlignment="center"
@@ -76,71 +106,106 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.341"
+        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileName"
         tools:layout_conversion_absoluteHeight="19dp"
         tools:layout_conversion_absoluteWidth="351dp" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <ImageButton
+        android:id="@+id/outfitsPic"
         android:layout_width="99dp"
         android:layout_height="113dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="50dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/hangerimg"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="291dp" />
+        app:layout_constraintEnd_toStartOf="@+id/calendarPic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePic"
+        app:srcCompat="@drawable/hangerimg" />
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <ImageButton
+        android:id="@+id/laundryBasket"
         android:layout_width="107dp"
         android:layout_height="124dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="100dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/laundry"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="515dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintEnd_toStartOf="@+id/Stats"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/laundry" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginBottom="442dp"
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="415dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/calendarPic"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/outfitsPic"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="Outfits" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="149dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginBottom="66dp"
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="255dp"
-        tools:layout_editor_absoluteY="428dp"
+        app:layout_constraintBottom_toTopOf="@+id/Stats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/calendarPic"
         tools:text="Calendar" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="115dp"
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="649dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/laundryBasket"
         tools:text="Laundry" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginBottom="26dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="265dp"
-        tools:layout_editor_absoluteY="649dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/Stats"
         tools:text="Stats" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,7 +37,7 @@ public class Login_Screen extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextTextEmailAddress);
         editTextPassword = findViewById(R.id.editTextTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
-        textViewRegister = findViewById(R.id.textViewRegister);
+        textViewRegister = findViewById(R.id.editProfile);
         textViewForgotPassword = findViewById(R.id.forgotPassword);
 
         //click listener is set, which triggers the login process when the button is clicked.
