@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
         private Button button;
 
         private FirebaseAuth firebaseAuth;
+        private SharedPreferences sharedPreferences;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
             setContentView(R.layout.registration_screen);
 
             firebaseAuth = FirebaseAuth.getInstance();
+            sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE);
 
             FirstName = findViewById(R.id.FirstName);
             LastName = findViewById(R.id.LastName);
@@ -92,8 +95,14 @@ import com.google.firebase.auth.FirebaseAuth;
                                 // Save additional user information to database if needed
                                 // You can create a user profile document in Firestore or update the user node in the Realtime Database with the first name, last name, etc.
 
+                                // Save user profile information in SharedPreferences
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("firstName", firstName);
+                                editor.putString("lastName", lastName);
+                                editor.putString("email", email);
+                                editor.apply();
+
                                 // Move to the user's custom homepage or the main homepage
-                                //todo: update homePage class
                                 Intent intent = new Intent(Register_Screen.this, homepage.class);
                                 startActivity(intent);
                                 finish(); // Optional: Finish the registration activity to prevent the user from going back
