@@ -130,7 +130,6 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:text="           Enter Email"
         android:textColor="#33FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
