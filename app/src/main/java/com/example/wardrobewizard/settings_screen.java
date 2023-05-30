@@ -4,36 +4,41 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class settings_screen extends Fragment {
+public class settings_screen extends AppCompatActivity {
 
-    public settings_screen() {}
+    private User currentUser; // Placeholder for the current user, you need to replace it with your own implementation
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.settings, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.settings);
 
-        TextView editProfileText = view.findViewById(R.id.EditText);
-        TextView signOutText = view.findViewById(R.id.signout);
-        TextView changePasswordText = view.findViewById(R.id.passwordChange);
-        TextView deleteAccountText = view.findViewById(R.id.deleteAccount);
-        TextView privacyPolicyText = view.findViewById(R.id.Privacy);
-        TextView serviceTermsText = view.findViewById(R.id.service_terms);
+        TextView editProfileText = findViewById(R.id.EditText);
+        TextView signOutText = findViewById(R.id.signout);
+        TextView changePasswordText = findViewById(R.id.passwordChange);
+        TextView deleteAccountText = findViewById(R.id.deleteAccount);
+        TextView privacyPolicyText = findViewById(R.id.Privacy);
+        TextView serviceTermsText = findViewById(R.id.service_terms);
 
         editProfileText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), edit_profile.class));
+                // Pass the current user's information to the edit profile activity
+                Intent intent = new Intent(settings_screen.this, edit_profile.class);
+                intent.putExtra("firstName", currentUser.getFirstName());
+                intent.putExtra("lastName", currentUser.getLastName());
+                intent.putExtra("email", currentUser.getEmail());
+                startActivity(intent);
             }
         });
 
@@ -49,7 +54,7 @@ public class settings_screen extends Fragment {
             @Override
             public void onClick(View v) {
                 // Navigate to the Change Password page
-                startActivity(new Intent(getActivity(), Change_Password.class));
+                startActivity(new Intent(settings_screen.this, Change_Password.class));
             }
         });
 
@@ -57,7 +62,7 @@ public class settings_screen extends Fragment {
             @Override
             public void onClick(View v) {
                 // Navigate to the Delete Account page
-                startActivity(new Intent(getActivity(), delete_account.class));
+                startActivity(new Intent(settings_screen.this, delete_account.class));
             }
         });
 
@@ -65,7 +70,7 @@ public class settings_screen extends Fragment {
             @Override
             public void onClick(View v) {
                 // Navigate to the Privacy Policy page
-                startActivity(new Intent(getActivity(), privacy_policy.class));
+                startActivity(new Intent(settings_screen.this, privacy_policy.class));
             }
         });
 
@@ -73,11 +78,11 @@ public class settings_screen extends Fragment {
             @Override
             public void onClick(View v) {
                 // Navigate to the Service Terms page
-                startActivity(new Intent(getActivity(), service_terms.class));
+                startActivity(new Intent(settings_screen.this, service_terms.class));
             }
         });
 
-        BottomNavigationView bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -86,12 +91,12 @@ public class settings_screen extends Fragment {
                 if (itemId == R.id.closetButton) {
                     // Handle closet button click
                     // Navigate to the closet page
-                    startActivity(new Intent(getActivity(), closet.class));
+                    startActivity(new Intent(settings_screen.this, closet.class));
                     return true;
                 } else if (itemId == R.id.addClothesButton) {
                     // Handle add clothes button click
                     // Navigate to the add clothes page
-                    startActivity(new Intent(getActivity(), add_clothes.class));
+                    startActivity(new Intent(settings_screen.this, add_clothes.class));
                     return true;
                 } else if (itemId == R.id.settingsButton) {
                     // Handle settings button click
@@ -101,12 +106,10 @@ public class settings_screen extends Fragment {
                 return false;
             }
         });
-
-        return view;
     }
 
     private void performSignOut() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(settings_screen.this);
         builder.setTitle("Sign Out");
         builder.setMessage("Are you sure you want to sign out?");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -116,8 +119,8 @@ public class settings_screen extends Fragment {
                 // ...
 
                 // Redirect the user to the login screen
-                startActivity(new Intent(getActivity(), Login_Screen.class));
-                getActivity().finish(); // Optional: Finish the current activity
+                startActivity(new Intent(settings_screen.this, Login_Screen.class));
+                finish(); // Optional: Finish the current activity
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -129,4 +132,3 @@ public class settings_screen extends Fragment {
         builder.create().show();
     }
 }
-

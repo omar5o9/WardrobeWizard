@@ -92,6 +92,11 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".ProfilePic"
+            android:exported="true">
+        </activity>
+
 
     </application>
 

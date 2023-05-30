@@ -1,8 +1,5 @@
 package com.example.wardrobewizard;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,105 +9,101 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-    public class Register_Screen extends AppCompatActivity {
+public class Register_Screen extends AppCompatActivity {
 
-        private EditText FirstName;
-        private EditText LastName;
-        private EditText emailEdit;
-        private EditText passwordEdit;
-        private EditText confirm_password;
-        private Button button;
+    private EditText firstNameEditText;
+    private EditText lastNameEditText;
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private EditText confirmPasswordEditText;
+    private Button registerButton;
 
-        private FirebaseAuth firebaseAuth;
-        private SharedPreferences sharedPreferences;
+    private FirebaseAuth firebaseAuth;
+    private SharedPreferences sharedPreferences;
+    private DatabaseReference usersRef;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.registration_screen);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.registration_screen);
 
-            firebaseAuth = FirebaseAuth.getInstance();
-            sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE);
+        firebaseAuth = FirebaseAuth.getInstance();
+        sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE);
+        usersRef = FirebaseDatabase.getInstance().getReference("users");
 
-            FirstName = findViewById(R.id.FirstName);
-            LastName = findViewById(R.id.LastName);
-            emailEdit = findViewById(R.id.email_Enter);
-            passwordEdit = findViewById(R.id.password_Enter);
-            confirm_password = findViewById(R.id.confirm_password_enter);
-            button = findViewById(R.id.button);
+        firstNameEditText = findViewById(R.id.FirstName);
+        lastNameEditText = findViewById(R.id.LastName);
+        emailEditText = findViewById(R.id.email_Enter);
+        passwordEditText = findViewById(R.id.password_Enter);
+        confirmPasswordEditText = findViewById(R.id.confirm_password_enter);
+        registerButton = findViewById(R.id.button);
 
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String firstName = FirstName.getText().toString().trim();
-                    String lastName = LastName.getText().toString().trim();
-                    String email = emailEdit.getText().toString().trim();
-                    String password = passwordEdit.getText().toString();
-                    String confirmPassword = confirm_password.getText().toString();
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String firstName = firstNameEditText.getText().toString().trim();
+                String lastName = lastNameEditText.getText().toString().trim();
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString();
+                String confirmPassword = confirmPasswordEditText.getText().toString();
 
-                    if (validateRegistrationDetails(firstName, lastName, email, password, confirmPassword)) {
-                        registerUser(firstName, lastName, email, password);
-                    }
+                if (validateRegistrationDetails(firstName, lastName, email, password, confirmPassword)) {
+                    registerUser(firstName, lastName, email, password);
                 }
-            });
-        }
-
-        private boolean validateRegistrationDetails(String firstName, String lastName, String email, String password, String confirmPassword) {
-            if (TextUtils.isEmpty(firstName)) {
-                FirstName.setError("Please enter your first name");
-                return false;
             }
-            if (TextUtils.isEmpty(lastName)) {
-                LastName.setError("Please enter your last name");
-                return false;
-            }
-            if (TextUtils.isEmpty(email)) {
-                emailEdit.setError("Please enter your email");
-                return false;
-            }
-            if (TextUtils.isEmpty(password)) {
-                passwordEdit.setError("Please enter your password");
-                return false;
-            }
-            if (!password.equals(confirmPassword)) {
-                confirm_password.setError("Passwords do not match");
-                return false;
-            }
-            return true;
-        }
-
-        private void registerUser(final String firstName, final String lastName, final String email, String password) {
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Registration successful
-                                Toast.makeText(Register_Screen.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                                // Save additional user information to database if needed
-                                // You can create a user profile document in Firestore or update the user node in the Realtime Database with the first name, last name, etc.
-
-                                // Save user profile information in SharedPreferences
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("firstName", firstName);
-                                editor.putString("lastName", lastName);
-                                editor.putString("email", email);
-                                editor.apply();
-
-                                // Move to the user's custom homepage or the main homepage
-                                Intent intent = new Intent(Register_Screen.this, homepage.class);
-                                startActivity(intent);
-                                finish(); // Optional: Finish the registration activity to prevent the user from going back
-                            } else {
-                                // Registration failed
-                                Toast.makeText(Register_Screen.this, "Registration failed", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        }
+        });
     }
+
+    private boolean validateRegistrationDetails(String firstName, String lastName, String email, String password, String confirmPassword) {
+        // Validation code here...
+
+        return true;
+    }
+
+    private void registerUser(final String firstName, final String lastName, final String email, String password) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Registration successful
+                            Toast.makeText(Register_Screen.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                            // Save additional user information to database if needed
+                            String userId = firebaseAuth.getCurrentUser().getUid();
+                            User user = new User(userId, firstName, lastName, email);
+                            saveUserToDatabase(user); // Save the user to the database
+
+                            // Save user profile information in SharedPreferences
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("firstName", firstName);
+                            editor.putString("lastName", lastName);
+                            editor.putString("email", email);
+                            editor.apply();
+
+                            // Move to the user's custom homepage or the main homepage
+                            Intent intent = new Intent(Register_Screen.this, homepage.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            // Registration failed
+                            Toast.makeText(Register_Screen.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void saveUserToDatabase(User user) {
+        String userId = user.getUserId(); // Get the user ID
+        usersRef.child(userId).setValue(user); // Save the user object to the database
+    }
+}

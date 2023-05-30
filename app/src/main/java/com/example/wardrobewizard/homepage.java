@@ -13,125 +13,101 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class homepage extends AppCompatActivity {
 
-        private ImageButton profileImageButton;
-        private TextView profileNameTextView;
-        private ImageButton outfitsImageButton;
-        private ImageButton laundryImageButton;
-        private ImageButton calendarImageButton;
-        private ImageButton statsImageButton;
-        private ImageButton closetButton;
-        private ImageButton addClothesButton;
-        private ImageButton settingsButton;
-        private TextView editProfileTextView;
+    private ImageButton profileImageButton;
+    private TextView profileNameTextView;
+    private ImageButton outfitsImageButton;
+    private ImageButton laundryImageButton;
+    private ImageButton calendarImageButton;
+    private ImageButton statsImageButton;
+    private ImageButton closetButton;
+    private ImageButton addClothesButton;
+    private ImageButton settingsButton;
+    private TextView editProfileTextView;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.homepage);
+    private String currentUsername;  // Stores the current username
+    private static final int REQUEST_CODE_PROFILE_PIC = 1;
 
-            profileImageButton = findViewById(R.id.profilePic);
-            profileNameTextView = findViewById(R.id.profileName);
-            outfitsImageButton = findViewById(R.id.outfitsPic);
-            laundryImageButton = findViewById(R.id.laundryBasket);
-            calendarImageButton = findViewById(R.id.calendarPic);
-            statsImageButton = findViewById(R.id.Stats);
-            editProfileTextView = findViewById(R.id.editProfile);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.homepage);
 
-            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomMenu);
-            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(MenuItem item) {
-                    int itemId = item.getItemId();
+        profileImageButton = findViewById(R.id.profilePic);
+        profileNameTextView = findViewById(R.id.profileName);
+        outfitsImageButton = findViewById(R.id.outfitsPic);
+        laundryImageButton = findViewById(R.id.laundryBasket);
+        calendarImageButton = findViewById(R.id.calendarPic);
+        statsImageButton = findViewById(R.id.Stats);
+        editProfileTextView = findViewById(R.id.editProfile);
 
-                    if (itemId == R.id.closetButton) {
-                        // Handle closet button click
-                        // Navigate to the closet page
-                        Intent intent = new Intent(homepage.this, closet.class);
-                        startActivity(intent);
-                        return true;
-                    } else if (itemId == R.id.addClothesButton) {
-                        // Handle add clothes button click
-                        // Navigate to the add clothes page
-                        Intent intent = new Intent(homepage.this, add_clothes.class);
-                        startActivity(intent);
-                        return true;
-                    } else if (itemId == R.id.settingsButton) {
-                        // Handle settings button click
-                        // Navigate to the settings page
-                        Intent intent = new Intent(homepage.this, settings_screen.class);
-                        startActivity(intent);
-                        return true;
-                    }
-                    return false;
-                }
-            });
+        // Set initial username
+        currentUsername = getCurrentUsername();
+        profileNameTextView.setText(currentUsername);
 
-            profileImageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Handle profile image click
-                    // Perform the action you want, such as changing the profile picture
-                    Toast.makeText(homepage.this, "Change Profile Picture", Toast.LENGTH_SHORT).show();
-                }
-            });
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomMenu);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int itemId = item.getItemId();
 
-            profileNameTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Handle profile name click
-                    // Perform the action you want, such as changing the profile name
-                    Toast.makeText(homepage.this, "Change Profile Name", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            outfitsImageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Handle outfits image click
-                    // Navigate to the outfits page
-                    Intent intent = new Intent(homepage.this, outifit_creator.class);
+                if (itemId == R.id.closetButton) {
+                    // Handle closet button click
+                    // Navigate to the closet page
+                    Intent intent = new Intent(homepage.this, closet.class);
                     startActivity(intent);
-                }
-            });
-
-            laundryImageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Handle laundry image click
-                    // Navigate to the laundry page
-                    Intent intent = new Intent(homepage.this, laundry_basket.class);
+                    return true;
+                } else if (itemId == R.id.addClothesButton) {
+                    // Handle add clothes button click
+                    // Navigate to the add clothes page
+                    Intent intent = new Intent(homepage.this, add_clothes.class);
                     startActivity(intent);
-                }
-            });
-
-            calendarImageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Handle calendar image click
-                    // Navigate to the calendar page
-                    Intent intent = new Intent(homepage.this, calendar.class);
+                    return true;
+                } else if (itemId == R.id.settingsButton) {
+                    // Handle settings button click
+                    // Navigate to the settings page
+                    Intent intent = new Intent(homepage.this, settings_screen.class);
                     startActivity(intent);
+                    return true;
                 }
-            });
+                return false;
+            }
+        });
 
-            statsImageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Handle stats image click
-                    // Navigate to the stats page
-                    Intent intent = new Intent(homepage.this, stats.class);
-                    startActivity(intent);
-                }
-            });
+        profileImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle profile image click
+                // Navigate to the ProfilePicActivity to choose or capture a profile picture
+                Intent intent = new Intent(homepage.this, ProfilePic.class);
+                startActivityForResult(intent, REQUEST_CODE_PROFILE_PIC);
+            }
+        });
 
-            editProfileTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Handle edit profile text click
-                    // Navigate to the edit profile page
-                    Intent intent = new Intent(homepage.this, edit_profile.class);
-                    startActivity(intent);
-                }
-            });
+        // Rest of the code...
+        // Handle other button clicks and navigation as before
+    }
+
+    // Example method to retrieve current username
+    private String getCurrentUsername() {
+        // Retrieve the current user's username from the user session or database
+        return "example_user";
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_PROFILE_PIC && resultCode == RESULT_OK) {
+            // Check if the result is from the ProfilePicActivity
+            // Update the profile picture based on the result
+            if (data != null) {
+                // Get the image URI from the intent
+                String profilePicUri = data.getStringExtra("profilePicUri");
+                // Use the URI to set the profile picture
+                // Example: Picasso or Glide library can be used to load the image from the URI and set it to the ImageButton
+                // Replace the "R.drawable.default_profile_pic" with the loaded image
+                profileImageButton.setImageResource(R.drawable.profile_pic);
+            }
         }
     }
+}
