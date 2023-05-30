@@ -61,4 +61,19 @@ public class settings_screen extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.settings, container, false);
     }
+
+   /* Button changePasswordButton = findViewById(R.id.changePasswordButton);
+changePasswordButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Get the current password and new password from the input fields
+            String currentPassword = currentPasswordEditText.getText().toString();
+            String newPassword = newPasswordEditText.getText().toString();
+
+            // Call the changePassword method passing the context, current password, and new password
+            Change_Password changePassword = new ChangePassword();
+            changePassword.changePassword(MainActivity.this, currentPassword, newPassword);
+        }
+    });*/
+
 }
