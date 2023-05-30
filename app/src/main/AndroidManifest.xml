@@ -76,6 +76,23 @@
             android:name=".stats"
             android:exported="true">
         </activity>
+
+        <activity
+            android:name=".delete_account"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".privacy_policy"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".service_terms"
+            android:exported="true">
+        </activity>
+
+
     </application>
 
 </manifest>
