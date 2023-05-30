@@ -5,12 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class settings_screen extends Fragment {
 
@@ -74,9 +77,33 @@ public class settings_screen extends Fragment {
             }
         });
 
+        BottomNavigationView bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.closetButton) {
+                    // Handle closet button click
+                    // Navigate to the closet page
+                    startActivity(new Intent(getActivity(), closet.class));
+                    return true;
+                } else if (itemId == R.id.addClothesButton) {
+                    // Handle add clothes button click
+                    // Navigate to the add clothes page
+                    startActivity(new Intent(getActivity(), add_clothes.class));
+                    return true;
+                } else if (itemId == R.id.settingsButton) {
+                    // Handle settings button click
+                    // Do nothing, already on the settings screen
+                    return true;
+                }
+                return false;
+            }
+        });
+
         return view;
     }
-
 
     private void performSignOut() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
