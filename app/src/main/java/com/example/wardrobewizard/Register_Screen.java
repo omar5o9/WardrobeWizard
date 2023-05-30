@@ -27,6 +27,7 @@ public class Register_Screen extends AppCompatActivity {
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
     private Button registerButton;
+    private static final int REQUEST_CODE_LOADING = 1;
 
     private FirebaseAuth firebaseAuth;
     private SharedPreferences sharedPreferences;
@@ -71,31 +72,25 @@ public class Register_Screen extends AppCompatActivity {
     }
 
     private void registerUser(final String firstName, final String lastName, final String email, String password) {
+        Intent loadingIntent = new Intent(Register_Screen.this, LoadingScreen.class);
+        startActivityForResult(loadingIntent, REQUEST_CODE_LOADING);
+
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        finishActivity(REQUEST_CODE_LOADING);
+
                         if (task.isSuccessful()) {
-                            // Registration successful
                             Toast.makeText(Register_Screen.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                            // Save additional user information to database if needed
                             String userId = firebaseAuth.getCurrentUser().getUid();
-                            User user = new User(userId, firstName, lastName, email);
-                            saveUserToDatabase(user); // Save the user to the database
+                            User user = new User(firstName, lastName, email);
+                            saveUserToDatabase(user);
 
-                            // Save user profile information in SharedPreferences
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("firstName", firstName);
-                            editor.putString("lastName", lastName);
-                            editor.putString("email", email);
-                            editor.apply();
-
-                            // Move to the user's custom homepage or the main homepage
                             Intent intent = new Intent(Register_Screen.this, homepage.class);
                             startActivity(intent);
                             finish();
                         } else {
-                            // Registration failed
                             Toast.makeText(Register_Screen.this, "Registration failed", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -103,7 +98,18 @@ public class Register_Screen extends AppCompatActivity {
     }
 
     private void saveUserToDatabase(User user) {
-        String userId = user.getUserId(); // Get the user ID
-        usersRef.child(userId).setValue(user); // Save the user object to the database
+        String userId = user.getUserId();
+        usersRef.child(userId).setValue(user);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_LOADING) {
+            if (resultCode == RESULT_CANCELED) {
+                // Handle loading cancellation if needed
+            }
+        }
     }
 }

@@ -22,43 +22,36 @@ public class Login_Screen extends AppCompatActivity {
     private Button buttonLogin;
     private TextView textViewRegister;
     private TextView textViewForgotPassword;
-
+    private static final int REQUEST_CODE_LOADING = 1;
 
     @Override
-
-    //initialize Firebase and set the content view to the login_screen layout
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.login_screen);
 
-        //views are initialized using their respective IDs from the XML layout using findViewById
         editTextEmail = findViewById(R.id.editTextTextEmailAddress);
         editTextPassword = findViewById(R.id.editTextTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
         textViewRegister = findViewById(R.id.editProfile);
         textViewForgotPassword = findViewById(R.id.forgotPassword);
 
-        //click listener is set, which triggers the login process when the button is clicked.
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle login button click
                 String email = editTextEmail.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
-                // Validate the login credentials
+
                 if (validateCredentials(email, password)) {
-                    // Perform the login process
                     loginUser(email, password);
                 }
             }
         });
+
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the click event for the "No Account yet? Create One" TextView
-                // Perform the action you want, such as navigating to the registration page
                 Intent intent = new Intent(Login_Screen.this, Register_Screen.class);
                 startActivity(intent);
             }
@@ -67,16 +60,12 @@ public class Login_Screen extends AppCompatActivity {
         textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the click event for the "Forgot Password" TextView
                 Intent intent = new Intent(Login_Screen.this, Forgot_Password.class);
                 startActivity(intent);
             }
         });
     }
 
-    //perform basic validation
-    // checks on the email and password.
-    // If the validation fails, appropriate error messages are displayed
     private boolean validateCredentials(String email, String password) {
         if (TextUtils.isEmpty(email)) {
             editTextEmail.setError("Please enter your email");
@@ -89,32 +78,36 @@ public class Login_Screen extends AppCompatActivity {
         return true;
     }
 
-    //If the validation succeeds, the loginUser method
-    // is called to authenticate the user using Firebase Authentication.
     private void loginUser(String email, String password) {
+        Intent loadingIntent = new Intent(Login_Screen.this, LoadingScreen.class);
+        startActivityForResult(loadingIntent, REQUEST_CODE_LOADING);
+
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
-                    //If the login is successful, the user is redirected to the HomepageActivity.
-                    // Otherwise, an error message is displayed using a Toast
-                    /*The Toast class in Android is used to display short-duration messages or notifications to the user.
-                    It provides a simple way to show pop-up messages at the bottom of the screen for a specified duration.
-                     The Toast.makeText() method is used to createa new Toast object with a specified message and duration.
-                    The makeText() method requires three parameters: the context (usually the current activity), the message to be displayed, and the duration of the toast.*/
-                    //ToDo:Need to update homepagePageActivity to new page name
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        finishActivity(REQUEST_CODE_LOADING);
+
                         if (task.isSuccessful()) {
-                            // Authentication successful
-                            Intent intent = new Intent(Login_Screen.this, homepage.class);
-                            startActivity(intent);
-                            finish(); // Optional: Finish the login activity to prevent the user from going back
+                            Intent homeIntent = new Intent(Login_Screen.this, homepage.class);
+                            startActivity(homeIntent);
+                            finish();
                         } else {
-                            // Authentication failed, show an error message or handle the failure case
-                            Toast.makeText(Login_Screen.this, "Invalid Login.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login_Screen.this, "Invalid login credentials", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_LOADING) {
+            if (resultCode == RESULT_CANCELED) {
+                // Handle loading cancellation if needed
+            }
+        }
     }
 }

@@ -7,8 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class edit_profile extends AppCompatActivity {
 
@@ -20,30 +24,16 @@ public class edit_profile extends AppCompatActivity {
     private EditText birthdayEditText;
     private Button saveChangesButton;
 
-    private String currentUsername; // Stores the current username
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile);
 
-        // Initialize views
-        usernameEditText = findViewById(R.id.editTextText);
-        emailTextView = findViewById(R.id.textView15);
-        firstNameTextView = findViewById(R.id.textView16);
-        lastNameTextView = findViewById(R.id.textView17);
-        phoneEditText = findViewById(R.id.editTextPhone);
-        birthdayEditText = findViewById(R.id.editTextDate2);
-        saveChangesButton = findViewById(R.id.button3);
+        initializeViews();
+        setInitialValues();
 
-        // Set initial values
-        currentUsername = getCurrentUserEmail(); // Get the current user's email address
-        usernameEditText.setText(currentUsername);
-        emailTextView.setText(currentUsername);
-        firstNameTextView.setText(getCurrentUserFirstName()); // Get the current user's first name
-        lastNameTextView.setText(getCurrentUserLastName()); // Get the current user's last name
-
-        // TextWatcher for usernameEditText to update currentUsername when changed
         usernameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -52,8 +42,10 @@ public class edit_profile extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                currentUsername = s.toString();
-                updateHomepageUsername(currentUsername);
+                if (currentUser != null) {
+                    currentUser.setFirstName(s.toString());
+                    updateHomepageUsername(s.toString());
+                }
             }
 
             @Override
@@ -62,7 +54,6 @@ public class edit_profile extends AppCompatActivity {
             }
         });
 
-        // Set OnClickListener for saveChangesButton
         saveChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,44 +62,77 @@ public class edit_profile extends AppCompatActivity {
         });
     }
 
-    // Method to save the changes made to the profile
+    private void initializeViews() {
+        usernameEditText = findViewById(R.id.editTextText);
+        emailTextView = findViewById(R.id.textView15);
+        firstNameTextView = findViewById(R.id.textView16);
+        lastNameTextView = findViewById(R.id.textView17);
+        phoneEditText = findViewById(R.id.editTextPhone);
+        birthdayEditText = findViewById(R.id.editTextDate2);
+        saveChangesButton = findViewById(R.id.button3);
+    }
+
+    private void setInitialValues() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String firstName = extras.getString("firstName");
+            String lastName = extras.getString("lastName");
+            String email = extras.getString("email");
+
+            currentUser = new User(firstName, lastName, email);
+            usernameEditText.setText(firstName);
+            emailTextView.setText(email);
+            firstNameTextView.setText(firstName);
+            lastNameTextView.setText(lastName);
+        }
+    }
+
     private void saveChanges() {
         String newUsername = usernameEditText.getText().toString();
         String newPhone = phoneEditText.getText().toString();
         String newBirthday = birthdayEditText.getText().toString();
 
-        // Save the changes to the user profile (e.g., update in the database)
+        // Save the changes to the user profile (Implement your own logic here)
+        if (currentUser != null) {
+            currentUser.setFirstName(newUsername);
+            currentUser.setPhone(newPhone);
+            currentUser.setBirthday(newBirthday);
 
-        // Save newUsername to SharedPreferences or update the user's profile document in the database
+            // Assuming you have a method to update the user profile in the database or make an API call
+            updateUserProfile(currentUser);
 
-        // Update the currentUsername with the new username
-        currentUsername = newUsername;
-
-        // Update the username displayed on the homepage
-        updateHomepageUsername(newUsername);
-
-        // Display a message or perform any other required actions
+            // Display a success message
+            showToast("Changes saved successfully");
+        } else {
+            // Display an error message or perform any other necessary action
+            showToast("Failed to save changes. User not available.");
+        }
     }
 
-    // Example methods to retrieve current user information
-    private String getCurrentUserEmail() {
-        // Retrieve the current user's email address from SharedPreferences or database
-        return "example@example.com";
-    }
+    private void updateUserProfile(User user) {
+        // Implement your logic to update the user profile in the database or make an API call
 
-    private String getCurrentUserFirstName() {
-        // Retrieve the current user's first name from SharedPreferences or database
-        return "John";
-    }
+        // Assuming you are using Firebase Realtime Database or Firestore
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUserId());
 
-    private String getCurrentUserLastName() {
-        // Retrieve the current user's last name from SharedPreferences or database
-        return "Doe";
+        // Update the user's fields
+        userRef.child("firstName").setValue(user.getFirstName());
+        userRef.child("lastName").setValue(user.getLastName());
+        userRef.child("email").setValue(user.getEmail());
+        userRef.child("phone").setValue(user.getPhone());
+        userRef.child("birthday").setValue(user.getBirthday());
+
+        // Display a success message or handle any errors
+        showToast("User profile updated successfully");
     }
 
     private void updateHomepageUsername(String newUsername) {
-        // Update the username displayed on the homepage with the newUsername
+        // Update the username displayed on the homepage (Implement your own logic here)
         TextView profileNameTextView = findViewById(R.id.profileName);
         profileNameTextView.setText(newUsername);
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

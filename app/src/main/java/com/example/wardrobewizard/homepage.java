@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
 
 public class homepage extends AppCompatActivity {
 
@@ -103,10 +104,12 @@ public class homepage extends AppCompatActivity {
             if (data != null) {
                 // Get the image URI from the intent
                 String profilePicUri = data.getStringExtra("profilePicUri");
-                // Use the URI to set the profile picture
-                // Example: Picasso or Glide library can be used to load the image from the URI and set it to the ImageButton
-                // Replace the "R.drawable.default_profile_pic" with the loaded image
-                profileImageButton.setImageResource(R.drawable.profile_pic);
+                if (profilePicUri != null) {
+                    // Use Picasso library to load the image from the URI and set it to the ImageButton
+                    Picasso.get().load(profilePicUri).into(profileImageButton);
+                } else {
+                    Toast.makeText(homepage.this, "Failed to load profile picture", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }

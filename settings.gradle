@@ -14,3 +14,9 @@ dependencyResolutionManagement {
 }
 rootProject.name = "WardrobeWizard"
 include ':app'
+
+buildCache {
+    local {
+        enabled = true
+    }
+}

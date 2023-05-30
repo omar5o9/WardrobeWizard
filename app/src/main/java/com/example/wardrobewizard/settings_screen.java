@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,12 @@ public class settings_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+
+        retrieveUserInformation();
+        if (currentUser == null) {
+            showErrorAndRedirect();
+            return;
+        }
 
         TextView editProfileText = findViewById(R.id.EditText);
         TextView signOutText = findViewById(R.id.signout);
@@ -106,6 +113,22 @@ public class settings_screen extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void retrieveUserInformation() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String firstName = extras.getString("firstName");
+            String lastName = extras.getString("lastName");
+            String email = extras.getString("email");
+            currentUser = new User(firstName, lastName, email);
+        }
+    }
+
+    private void showErrorAndRedirect() {
+        Toast.makeText(this, "User information not available", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(settings_screen.this, Login_Screen.class));
+        finish();
     }
 
     private void performSignOut() {

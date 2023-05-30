@@ -97,6 +97,10 @@
             android:exported="true">
         </activity>
 
+        <activity android:name=".LoadingScreen"
+                  android:exported="true">
+        </activity>
+
 
     </application>
 
