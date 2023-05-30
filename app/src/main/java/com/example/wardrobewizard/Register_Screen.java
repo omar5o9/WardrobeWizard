@@ -98,7 +98,7 @@ public class Register_Screen extends AppCompatActivity {
     }
 
     private void saveUserToDatabase(User user) {
-        String userId = user.getUserId();
+        String userId = user.getCurrentUser().getUserId();
         usersRef.child(userId).setValue(user);
     }
 

@@ -15,6 +15,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login_Screen extends AppCompatActivity {
     private EditText editTextEmail;
@@ -90,14 +95,43 @@ public class Login_Screen extends AppCompatActivity {
                         finishActivity(REQUEST_CODE_LOADING);
 
                         if (task.isSuccessful()) {
-                            Intent homeIntent = new Intent(Login_Screen.this, homepage.class);
-                            startActivity(homeIntent);
-                            finish();
+                            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            retrieveUserProfile(userId);
                         } else {
                             Toast.makeText(Login_Screen.this, "Invalid login credentials", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+    }
+
+    private void retrieveUserProfile(String userId) {
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+        usersRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        // Load the user's previously uploaded closet based on the retrieved user profile data
+                        // Implement the necessary logic here
+
+                        // Redirect to the homepage
+                        Intent homeIntent = new Intent(Login_Screen.this, homepage.class);
+                        startActivity(homeIntent);
+                        finish();
+                    } else {
+                        Toast.makeText(Login_Screen.this, "User profile not found", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(Login_Screen.this, "User profile not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(Login_Screen.this, "Failed to retrieve user profile", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
