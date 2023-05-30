@@ -10,32 +10,29 @@
         android:id="@+id/FirstName"
         android:layout_width="129dp"
         android:layout_height="41dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="49dp"
         android:layout_marginBottom="20dp"
         android:ems="10"
         android:inputType="text"
-        android:text="First Name"
         android:textColor="#80FDFAFA"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/Email"
         app:layout_constraintEnd_toStartOf="@+id/LastName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Register"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
     <EditText
         android:id="@+id/LastName"
         android:layout_width="122dp"
         android:layout_height="49dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="7dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="61dp"
         android:layout_marginBottom="70dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Last Name"
         android:textColor="#80FDFAFA"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/email_Enter"
@@ -50,9 +47,8 @@
         android:layout_width="151dp"
         android:layout_height="51dp"
         android:layout_marginStart="121dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="121dp"
-        android:layout_marginBottom="10dp"
         android:selectAllOnFocus="false"
         android:text="Register"
         android:textColor="#8CFEFFFF"
@@ -61,21 +57,23 @@
         android:textIsSelectable="false"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/LastName"
+        app:layout_constraintBottom_toTopOf="@+id/textView32"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HeaderIMG" />
 
     <ImageView
         android:id="@+id/HeaderIMG"
-        android:layout_width="398dp"
-        android:layout_height="244dp"
+        android:layout_width="391dp"
+        android:layout_height="191dp"
         android:layout_marginBottom="75dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/LastName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142"
         app:srcCompat="@drawable/r" />
 
     <EditText
@@ -194,5 +192,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirm_password_enter"
         tools:text="Create Account" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="66dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="4dp"
+        android:text="First Name"
+        android:textColor="#80FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/FirstName"
+        app:layout_constraintEnd_toStartOf="@+id/textView32"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HeaderIMG" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="3dp"
+        android:text="Last Name"
+        android:textColor="#80FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/LastName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Register"
+        app:layout_constraintTop_toBottomOf="@+id/Register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
