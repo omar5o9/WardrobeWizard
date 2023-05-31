@@ -108,8 +108,13 @@ public class edit_profile extends AppCompatActivity {
     }
 
     private void updateUserProfile(User user) {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("wardrobe-wizard-8fe58-default-rtdb").child("users").child(user.getUserId());
-        userRef.setValue(user);
+        try {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("wardrobe-wizard-8fe58-default-rtdb").child("users").child(user.getUserId());
+            userRef.setValue(user);
+        } catch (Exception e) {
+            // Handle the exception or display an error message
+            showToast("Failed to update user profile: " + e.getMessage());
+        }
     }
 
     private void showToast(String message) {

@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -85,6 +85,65 @@ public class settings_screen extends AppCompatActivity {
                 return false;
             }
         });
+        TextView editProfile = findViewById(R.id.editProfileSettings);
+        TextView deleteAccount = findViewById(R.id.deleteAccount);
+        TextView serviceTerms = findViewById(R.id.service_terms);
+        TextView passwordChange = findViewById(R.id.passwordChange);
+        TextView privacy = findViewById(R.id.Privacy);
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to the Edit Profile page
+                Intent intent = new Intent(settings_screen.this, edit_profile.class);
+
+                // Pass any necessary extras
+                if (currentUser != null) {
+                    intent.putExtra("firstName", currentUser.getFirstName());
+                    intent.putExtra("lastName", currentUser.getLastName());
+                    intent.putExtra("email", currentUser.getEmail());
+                    startActivity(intent);
+                } else {
+                    showToast("User data not available. Cannot edit profile.");
+                }
+            }
+        });
+
+        deleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to the Delete Account page
+                Intent intent = new Intent(settings_screen.this, delete_account.class);
+                startActivity(intent);
+            }
+        });
+
+        serviceTerms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to the Service Terms page
+                Intent intent = new Intent(settings_screen.this, service_terms.class);
+                startActivity(intent);
+            }
+        });
+
+        passwordChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to the Password Change page
+                Intent intent = new Intent(settings_screen.this, Change_Password.class);
+                startActivity(intent);
+            }
+        });
+
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to the Privacy Policy page
+                Intent intent = new Intent(settings_screen.this, privacy_policy.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void performSignOut() {
@@ -94,13 +153,18 @@ public class settings_screen extends AppCompatActivity {
         builder.setPositiveButton("Sign Out", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Sign out the user
-                FirebaseAuth.getInstance().signOut();
+                try {
+                    // Sign out the user
+                    FirebaseAuth.getInstance().signOut();
 
-                // Redirect to the login screen
-                Intent intent = new Intent(settings_screen.this, Login_Screen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                    // Redirect to the login screen
+                    Intent intent = new Intent(settings_screen.this, Login_Screen.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    // Handle the exception or display an error message
+                    showToast("Failed to sign out. Error: " + e.getMessage());
+                }
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -111,6 +175,11 @@ public class settings_screen extends AppCompatActivity {
             }
         });
         builder.create().show();
+    }
+
+    private void showToast(String message) {
+        // Display a toast message
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

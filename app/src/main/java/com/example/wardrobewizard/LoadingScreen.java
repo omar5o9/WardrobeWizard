@@ -56,26 +56,31 @@ public class LoadingScreen extends AppCompatActivity {
     private class LoadUserDataTask extends AsyncTask<Void, Void, User> {
         @Override
         protected User doInBackground(Void... voids) {
-            // Perform any data loading or initialization tasks here
-            // For example, fetch user information from Firebase Authentication or a database
+            try {
+                // Perform any data loading or initialization tasks here
+                // For example, fetch user information from Firebase Authentication or a database
 
-            // Get the currently authenticated user
-            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            if (firebaseUser != null) {
-                // User is authenticated, fetch user information
-                String displayName = firebaseUser.getDisplayName();
-                String email = firebaseUser.getEmail();
-                Uri photoUrl = firebaseUser.getPhotoUrl();
+                // Get the currently authenticated user
+                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (firebaseUser != null) {
+                    // User is authenticated, fetch user information
+                    String displayName = firebaseUser.getDisplayName();
+                    String email = firebaseUser.getEmail();
+                    Uri photoUrl = firebaseUser.getPhotoUrl();
 
-                // Create a User object with the fetched information
-                User user = new User();
-                user.setUserName(displayName);
-                user.setEmail(email);
-                user.setProfilePicUrl(photoUrl != null ? photoUrl.toString() : null);
+                    // Create a User object with the fetched information
+                    User user = new User();
+                    user.setUserName(displayName);
+                    user.setEmail(email);
+                    user.setProfilePicUrl(photoUrl != null ? photoUrl.toString() : null);
 
-                return user;
-            } else {
-                // User is not authenticated, return null or handle the case accordingly
+                    return user;
+                } else {
+                    // User is not authenticated, return null or handle the case accordingly
+                    return null;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
                 return null;
             }
         }
@@ -95,3 +100,4 @@ public class LoadingScreen extends AppCompatActivity {
         }
     }
 }
+

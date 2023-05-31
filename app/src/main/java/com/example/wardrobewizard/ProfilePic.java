@@ -11,9 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -115,6 +113,7 @@ public class ProfilePic extends Activity {
                     selectedImageBitmap = imageBitmap;
                 } catch (IOException e) {
                     e.printStackTrace();
+                    Toast.makeText(ProfilePic.this, "Failed to load image", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -134,41 +133,45 @@ public class ProfilePic extends Activity {
             // Upload the image to Firebase Storage
             UploadTask uploadTask = imageRef.putBytes(imageData);
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // Get the image download URL
+                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // Get the image download URL
-                            imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri downloadUri) {
-                                    // Save the image URL to the database
-                                    userRef.child("profilePictureUrl").setValue(downloadUri.toString())
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Toast.makeText(ProfilePic.this, "Profile picture saved", Toast.LENGTH_SHORT).show();
-                                                    // Go back to the home screen or perform any necessary action
-                                                    finish();
-                                                    startActivity(new Intent(ProfilePic.this, homepage.class));
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(ProfilePic.this, "Failed to save profile picture", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                }
-                            });
+                        public void onSuccess(Uri downloadUri) {
+                            // Save the image URL to the database
+                            userRef.child("profilePictureUrl").setValue(downloadUri.toString())
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(ProfilePic.this, "Profile picture saved", Toast.LENGTH_SHORT).show();
+                                            // Go back to the home screen or perform any necessary action
+                                            finish();
+                                            startActivity(new Intent(ProfilePic.this, homepage.class));
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(ProfilePic.this, "Failed to save profile picture", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
+                    }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProfilePic.this, "Failed to upload profile picture", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProfilePic.this, "Failed to get download URL", Toast.LENGTH_SHORT).show();
                         }
                     });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(ProfilePic.this, "Failed to upload profile picture", Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
-            // Handle the case when userRef is null
+            Toast.makeText(ProfilePic.this, "User reference is null", Toast.LENGTH_SHORT).show();
         }
     }
 }

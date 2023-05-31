@@ -92,7 +92,7 @@ public class User {
             return currentUser.getUid();
         } else {
             // Handle the case when the user is not authenticated
-            return null;
+            throw new RuntimeException("User is not authenticated.");
         }
     }
 
@@ -106,15 +106,21 @@ public class User {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
                         User user = dataSnapshot.getValue(User.class);
-                        // Display the user information or update the UI
-                        // Example: updateUI(user);
-                        // ...
+                        if (user != null) {
+                            user.setProfilePicUrl(dataSnapshot.child("profilePictureUrl").getValue(String.class));
+                            // Display the user information or update the UI
+                            // Example: updateUI(user);
+                            // ...
+                        } else {
+                            throw new RuntimeException("User data is null.");
+                        }
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Handle database error if needed
+                    throw databaseError.toException();
                 }
             });
         }
@@ -132,8 +138,11 @@ public class User {
     }
 
     public void setUserName(String username) {
-
-        this.username = username;
+        if (username != null) {
+            this.username = username;
+        } else {
+            this.username = "";
+        }
     }
 
     public String getUsername() {

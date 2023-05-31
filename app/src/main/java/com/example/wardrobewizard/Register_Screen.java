@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -113,10 +114,18 @@ public class Register_Screen extends AppCompatActivity {
                                 Intent intent = new Intent(Register_Screen.this, homepage.class);
                                 startActivity(intent);
                                 finish();
+                            } else {
+                                Toast.makeText(Register_Screen.this, "Failed to retrieve user", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(Register_Screen.this, "Registration failed", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Register_Screen.this, "Registration failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -140,9 +149,18 @@ public class Register_Screen extends AppCompatActivity {
                                 // Username updated successfully in the authentication user profile
                             } else {
                                 // Failed to update the username in the authentication user profile
+                                Toast.makeText(Register_Screen.this, "Failed to update username in user profile", Toast.LENGTH_SHORT).show();
                             }
                         }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Register_Screen.this, "Failed to update username: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     });
+        } else {
+            Toast.makeText(Register_Screen.this, "Current user is null", Toast.LENGTH_SHORT).show();
         }
     }
 }

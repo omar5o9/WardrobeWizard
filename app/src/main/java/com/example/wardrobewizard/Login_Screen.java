@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -100,6 +102,13 @@ public class Login_Screen extends AppCompatActivity {
                         } else {
                             Toast.makeText(Login_Screen.this, "Invalid login credentials", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Login_Screen.this, "Failed to login: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        finishActivity(REQUEST_CODE_LOADING);
                     }
                 });
     }

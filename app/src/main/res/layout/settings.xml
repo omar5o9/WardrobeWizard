@@ -7,15 +7,15 @@
     android:background="@color/black"
     tools:context=".settings_screen">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        android:layout_width="402dp"
-        android:layout_height="99dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="391dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/service_terms"
         app:menu="@menu/bottom_menu" />
@@ -31,7 +31,7 @@
         android:text="Settings"
         android:textColor="@color/white"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/EditText"
+        app:layout_constraintBottom_toTopOf="@+id/editProfileSettings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <TextView
-        android:id="@+id/EditText"
+        android:id="@+id/editProfileSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
@@ -144,8 +144,9 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/passwordChange"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditText"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileSettings"
         tools:text="Sign Out" />
 
     <androidx.constraintlayout.widget.Guideline
