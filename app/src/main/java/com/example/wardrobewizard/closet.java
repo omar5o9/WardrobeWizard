@@ -21,7 +21,7 @@ import java.util.List;
 
 public class closet extends Fragment {
 
-    private GridView gridView;
+    /*private GridView gridView;
     private PictureAdapter pictureAdapter;
     private List<Picture> pictureList;
 
@@ -78,5 +78,5 @@ public class closet extends Fragment {
         Picture picture = new Picture("picture_url", "description", "color", "size", "style", "price");
         pictureList.add(picture);
         pictureAdapter.notifyDataSetChanged();
-    }
+    }*/
 }

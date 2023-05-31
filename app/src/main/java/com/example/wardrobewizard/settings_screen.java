@@ -4,6 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +34,15 @@ public class settings_screen extends AppCompatActivity {
 
             currentUser = new User(firstName, lastName, email);
         }
+
+        // Set click listener for the sign out text
+        TextView signOutTextView = findViewById(R.id.signout);
+        signOutTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performSignOut();
+            }
+        });
     }
 
     private void initializeViews() {

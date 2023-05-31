@@ -9,8 +9,8 @@ import android.widget.CalendarView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-public class calendar extends Fragment {
-
+public class calendar{
+/*
     private CalendarView calendarView;
 
     public calendar() {
@@ -33,5 +33,5 @@ public class calendar extends Fragment {
         });
 
         return view;
-    }
+    }*/
 }

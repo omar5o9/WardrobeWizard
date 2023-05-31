@@ -24,8 +24,8 @@ import androidx.fragment.app.Fragment;
 
 import java.io.IOException;
 
-public class add_clothes extends Fragment {
-
+public class add_clothes {
+/*
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -191,5 +191,5 @@ public class add_clothes extends Fragment {
                 Toast.makeText(requireContext(), "Storage permission denied", Toast.LENGTH_SHORT).show();
             }
         }
-    }
+    }*/
 }

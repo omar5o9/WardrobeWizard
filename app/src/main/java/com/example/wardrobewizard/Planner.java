@@ -9,8 +9,8 @@ import android.widget.ListView;
 
 import java.util.List;
 
-public class Planner extends Fragment {
-
+public class Planner {
+/*
     private ListView listViewOutfits;
     private List<String> outfits;
     private ArrayAdapter<String> outfitsAdapter;
@@ -39,5 +39,5 @@ public class Planner extends Fragment {
         });
 
         return view;
-    }
+    }*/
 }
