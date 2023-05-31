@@ -98,7 +98,8 @@ public class Register_Screen extends AppCompatActivity {
     }
 
     private void saveUserToDatabase(User user) {
-        String userId = user.getCurrentUser().getUserId();
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
         usersRef.child(userId).setValue(user);
     }
 

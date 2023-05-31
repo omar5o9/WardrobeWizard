@@ -10,7 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class homepage extends AppCompatActivity {
 
@@ -92,6 +95,14 @@ public class homepage extends AppCompatActivity {
     private String getCurrentUsername() {
         // Retrieve the current user's username from the user session or database
         return "example_user";
+    }
+    private void saveUserToDatabase(User user) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+        usersRef.child(userId).setValue(user);
+
+        // Store the user's profile picture in Firebase Storage
+        // Implement the necessary logic here
     }
 
     @Override

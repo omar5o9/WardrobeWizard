@@ -107,29 +107,26 @@ public class edit_profile extends AppCompatActivity {
             // Display an error message or perform any other necessary action
             showToast("Failed to save changes. User not available.");
         }
+        currentUser.setPhone(newPhone);
+        currentUser.setBirthday(newBirthday);
+
     }
 
     private void updateUserProfile(User user) {
         // Implement your logic to update the user profile in the database or make an API call
 
-        // Assuming you are using Firebase Realtime Database or Firestore
+        // Assuming you are using Firebase Realtime Database
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUserId());
 
         // Update the user's fields
         userRef.child("firstName").setValue(user.getFirstName());
         userRef.child("lastName").setValue(user.getLastName());
-        userRef.child("email").setValue(user.getEmail());
         userRef.child("phone").setValue(user.getPhone());
         userRef.child("birthday").setValue(user.getBirthday());
-
-        // Display a success message or handle any errors
-        showToast("User profile updated successfully");
     }
 
-    private void updateHomepageUsername(String newUsername) {
-        // Update the username displayed on the homepage (Implement your own logic here)
-        TextView profileNameTextView = findViewById(R.id.profileName);
-        profileNameTextView.setText(newUsername);
+    private void updateHomepageUsername(String username) {
+        // Implement your logic to update the username displayed on the homepage
     }
 
     private void showToast(String message) {

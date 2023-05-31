@@ -1,157 +1,99 @@
 package com.example.wardrobewizard;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class settings_screen extends AppCompatActivity {
 
-    private User currentUser; // Placeholder for the current user, you need to replace it with your own implementation
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
-        retrieveUserInformation();
-        if (currentUser == null) {
-            showErrorAndRedirect();
-            return;
+        initializeViews();
+        setBottomNavigationView();
+
+        // Get the current user information from intent extras
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String firstName = extras.getString("firstName");
+            String lastName = extras.getString("lastName");
+            String email = extras.getString("email");
+
+            currentUser = new User(firstName, lastName, email);
         }
+    }
 
-        TextView editProfileText = findViewById(R.id.EditText);
-        TextView signOutText = findViewById(R.id.signout);
-        TextView changePasswordText = findViewById(R.id.passwordChange);
-        TextView deleteAccountText = findViewById(R.id.deleteAccount);
-        TextView privacyPolicyText = findViewById(R.id.Privacy);
-        TextView serviceTermsText = findViewById(R.id.service_terms);
+    private void initializeViews() {
+        // Implement your views initialization here
+    }
 
-        editProfileText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pass the current user's information to the edit profile activity
-                Intent intent = new Intent(settings_screen.this, edit_profile.class);
-                intent.putExtra("firstName", currentUser.getFirstName());
-                intent.putExtra("lastName", currentUser.getLastName());
-                intent.putExtra("email", currentUser.getEmail());
-                startActivity(intent);
-            }
-        });
+    private void setBottomNavigationView() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        signOutText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Perform sign out
-                performSignOut();
-            }
-        });
+        bottomNavigationView.setSelectedItemId(R.id.settingsButton);
 
-        changePasswordText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to the Change Password page
-                startActivity(new Intent(settings_screen.this, Change_Password.class));
-            }
-        });
-
-        deleteAccountText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to the Delete Account page
-                startActivity(new Intent(settings_screen.this, delete_account.class));
-            }
-        });
-
-        privacyPolicyText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to the Privacy Policy page
-                startActivity(new Intent(settings_screen.this, privacy_policy.class));
-            }
-        });
-
-        serviceTermsText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to the Service Terms page
-                startActivity(new Intent(settings_screen.this, service_terms.class));
-            }
-        });
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-
-                if (itemId == R.id.closetButton) {
-                    // Handle closet button click
-                    // Navigate to the closet page
-                    startActivity(new Intent(settings_screen.this, closet.class));
-                    return true;
-                } else if (itemId == R.id.addClothesButton) {
-                    // Handle add clothes button click
-                    // Navigate to the add clothes page
-                    startActivity(new Intent(settings_screen.this, add_clothes.class));
-                    return true;
-                } else if (itemId == R.id.settingsButton) {
-                    // Handle settings button click
-                    // Do nothing, already on the settings screen
-                    return true;
+                switch (item.getItemId()) {
+                    case R.id.closetButton:
+                        // Handle closet navigation
+                        return true;
+                    case R.id.addClothesButton:s:
+                        // Handle add clothes navigation
+                        return true;
+                    case R.id.settingsButton:
+                        // Do nothing as we are already in the settings screen
+                        return true;
                 }
                 return false;
             }
         });
     }
 
-    private void retrieveUserInformation() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String firstName = extras.getString("firstName");
-            String lastName = extras.getString("lastName");
-            String email = extras.getString("email");
-            currentUser = new User(firstName, lastName, email);
-        }
-    }
-
-    private void showErrorAndRedirect() {
-        Toast.makeText(this, "User information not available", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(settings_screen.this, Login_Screen.class));
-        finish();
-    }
-
     private void performSignOut() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(settings_screen.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Sign Out");
         builder.setMessage("Are you sure you want to sign out?");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Sign Out", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Perform the sign out operation (Implement your own sign out logic here)
-                // ...
+                // Sign out the user
+                FirebaseAuth.getInstance().signOut();
 
-                // Redirect the user to the login screen
-                startActivity(new Intent(settings_screen.this, Login_Screen.class));
-                finish(); // Optional: Finish the current activity
+                // Redirect to the login screen
+                Intent intent = new Intent(settings_screen.this, Login_Screen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Do nothing, dismiss the dialog
+                // Dismiss the dialog
+                dialog.dismiss();
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Handle back press to prevent accidental sign out
+        // Display the sign-out confirmation dialog
+        performSignOut();
     }
 }

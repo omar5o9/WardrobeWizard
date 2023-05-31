@@ -69,25 +69,27 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User getCurrentUser() {
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            String userId = firebaseUser.getUid();
-            String firstName = firebaseUser.getDisplayName();
-            String email = firebaseUser.getEmail();
-            // Retrieve other user information as needed
-
-            // Create and return a User object
-            return new User(userId, firstName, email);
+    public static String getCurrentUserId() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            return currentUser.getUid();
         } else {
-            return null; // No user is currently logged in
+            // Handle the case when the user is not authenticated
+            return null;
         }
     }
-    public void setCurrentUser(User user) {
-        this.userId = user.getUserId();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.email = user.getEmail();
-        // Set other user properties as needed
+
+    public static User getCurrentUser() {
+        String currentUserId = getCurrentUserId();
+        if (currentUserId != null) {
+            // Implement the logic to retrieve the user object from your data source
+            // For example, you can query the Firebase Realtime Database or Firestore
+            // using the currentUserId to get the corresponding User object
+            // Return the User object or null if the user is not found
+            // Example: return MyFirebaseDatabase.getUserById(currentUserId);
+            // ...
+        }
+        return null;
     }
+}
 }
