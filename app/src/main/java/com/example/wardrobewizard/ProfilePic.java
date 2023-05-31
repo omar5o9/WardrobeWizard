@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -51,9 +53,11 @@ public class ProfilePic extends Activity {
         storageRef = FirebaseStorage.getInstance().getReference();
 
         // Assuming you have a userRef instance in your edit_profile activity
-        userRef = FirebaseDatabase.getInstance().getReference()
-                .child("users")
-                .child(currentUser.getUserId());
+        if (currentUser != null) {
+            userRef = FirebaseDatabase.getInstance().getReference()
+                    .child("users")
+                    .child(currentUser.getUserId());
+        }
 
         takePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +89,8 @@ public class ProfilePic extends Activity {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } else {
+            Toast.makeText(this, "No camera app found", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -104,18 +110,26 @@ public class ProfilePic extends Activity {
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     profileImageView.setImageBitmap(imageBitmap);
                     selectedImageBitmap = imageBitmap;
+                } else {
+                    Toast.makeText(this, "Failed to capture image", Toast.LENGTH_SHORT).show();
                 }
             } else if (requestCode == REQUEST_IMAGE_PICK && data != null) {
                 Uri imageUri = data.getData();
-                try {
-                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                    profileImageView.setImageBitmap(imageBitmap);
-                    selectedImageBitmap = imageBitmap;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Toast.makeText(ProfilePic.this, "Failed to load image", Toast.LENGTH_SHORT).show();
+                if (imageUri != null) {
+                    try {
+                        Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                        profileImageView.setImageBitmap(imageBitmap);
+                        selectedImageBitmap = imageBitmap;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Failed to retrieve image", Toast.LENGTH_SHORT).show();
                 }
             }
+        } else {
+            Toast.makeText(this, "Image capture failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -139,23 +153,27 @@ public class ProfilePic extends Activity {
                     imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri downloadUri) {
-                            // Save the image URL to the database
-                            userRef.child("profilePictureUrl").setValue(downloadUri.toString())
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Toast.makeText(ProfilePic.this, "Profile picture saved", Toast.LENGTH_SHORT).show();
-                                            // Go back to the home screen or perform any necessary action
-                                            finish();
-                                            startActivity(new Intent(ProfilePic.this, homepage.class));
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(ProfilePic.this, "Failed to save profile picture", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                            if (downloadUri != null) {
+                                // Save the image URL to the database
+                                userRef.child("profilePictureUrl").setValue(downloadUri.toString())
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(ProfilePic.this, "Profile picture saved", Toast.LENGTH_SHORT).show();
+                                                // Go back to the home screen or perform any necessary action
+                                                finish();
+                                                startActivity(new Intent(ProfilePic.this, homepage.class));
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(ProfilePic.this, "Failed to save profile picture", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            } else {
+                                Toast.makeText(ProfilePic.this, "Failed to get download URL", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -171,7 +189,8 @@ public class ProfilePic extends Activity {
                 }
             });
         } else {
-            Toast.makeText(ProfilePic.this, "User reference is null", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "User reference is null", Toast.LENGTH_SHORT).show();
         }
     }
 }
+
