@@ -41,23 +41,40 @@ public class settings_screen extends AppCompatActivity {
     }
 
     private void setBottomNavigationView() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setSelectedItemId(R.id.settingsButton);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.closetButton:
-                        // Handle closet navigation
-                        return true;
-                    case R.id.addClothesButton:s:
-                        // Handle add clothes navigation
-                        return true;
-                    case R.id.settingsButton:
-                        // Do nothing as we are already in the settings screen
-                        return true;
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.homepage) {
+                    // Handle closet button click
+                    // Navigate to the closet page
+                    Intent intent = new Intent(settings_screen.this, homepage.class);
+                    startActivity(intent);
+                    return true;
+
+                if (itemId == R.id.closetButton) {
+                    // Handle closet button click
+                    // Navigate to the closet page
+                    intent = new Intent(settings_screen.this, closet.class);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.addClothesButton) {
+                    // Handle add clothes button click
+                    // Navigate to the add clothes page
+                    intent = new Intent(settings_screen.this, add_clothes.class);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.settingsButton) {
+                    // Handle settings button click
+                    // Navigate to the settings page
+                    intent = new Intent(settings_screen.this, settings_screen.class);
+                    startActivity(intent);
+                    return true;
                 }
                 return false;
             }

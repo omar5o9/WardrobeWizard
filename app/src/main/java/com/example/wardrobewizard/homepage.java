@@ -9,10 +9,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class homepage extends AppCompatActivity {
@@ -117,7 +117,9 @@ public class homepage extends AppCompatActivity {
                 String profilePicUri = data.getStringExtra("profilePicUri");
                 if (profilePicUri != null) {
                     // Use Picasso library to load the image from the URI and set it to the ImageButton
-                    Picasso.get().load(profilePicUri).into(profileImageButton);
+                    Glide.with(homepage.this)
+                            .load(profilePicUri)
+                            .into(profileImageButton);;
                 } else {
                     Toast.makeText(homepage.this, "Failed to load profile picture", Toast.LENGTH_SHORT).show();
                 }

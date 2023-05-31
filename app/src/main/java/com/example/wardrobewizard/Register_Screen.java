@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,7 +31,6 @@ public class Register_Screen extends AppCompatActivity {
     private static final int REQUEST_CODE_LOADING = 1;
 
     private FirebaseAuth firebaseAuth;
-    private SharedPreferences sharedPreferences;
     private DatabaseReference usersRef;
 
     @Override
@@ -39,7 +39,6 @@ public class Register_Screen extends AppCompatActivity {
         setContentView(R.layout.registration_screen);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE);
         usersRef = FirebaseDatabase.getInstance().getReference("users");
 
         firstNameEditText = findViewById(R.id.FirstName);
@@ -66,7 +65,30 @@ public class Register_Screen extends AppCompatActivity {
     }
 
     private boolean validateRegistrationDetails(String firstName, String lastName, String email, String password, String confirmPassword) {
-        // Validation code here...
+        if (TextUtils.isEmpty(firstName)) {
+            Toast.makeText(this, "Please enter your first name", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (TextUtils.isEmpty(lastName)) {
+            Toast.makeText(this, "Please enter your last name", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         return true;
     }
@@ -82,14 +104,20 @@ public class Register_Screen extends AppCompatActivity {
                         finishActivity(REQUEST_CODE_LOADING);
 
                         if (task.isSuccessful()) {
-                            Toast.makeText(Register_Screen.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                            String userId = firebaseAuth.getCurrentUser().getUid();
-                            User user = new User(firstName, lastName, email);
-                            saveUserToDatabase(user);
+                            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                            if (firebaseUser != null) {
+                                String userId = firebaseUser.getUid();
 
-                            Intent intent = new Intent(Register_Screen.this, homepage.class);
-                            startActivity(intent);
-                            finish();
+                                // Save user information to Realtime Database
+                                User user = new User(userId, firstName, lastName, email);
+                                saveUserToDatabase(user);
+
+                                Toast.makeText(Register_Screen.this, "Registration successful", Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(Register_Screen.this, homepage.class);
+                                startActivity(intent);
+                                finish();
+                            }
                         } else {
                             Toast.makeText(Register_Screen.this, "Registration failed", Toast.LENGTH_SHORT).show();
                         }
@@ -99,8 +127,8 @@ public class Register_Screen extends AppCompatActivity {
 
     private void saveUserToDatabase(User user) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
-        usersRef.child(userId).setValue(user);
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://wardrobe-wizard-8fe58-default-rtdb.firebaseio.com");
+        usersRef.child("users").child(userId).setValue(user);
     }
 
     @Override

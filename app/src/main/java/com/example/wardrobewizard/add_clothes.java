@@ -24,7 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import java.io.IOException;
 
-public class AddClothesFragment extends Fragment {
+public class add_clothes extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -47,12 +47,12 @@ public class AddClothesFragment extends Fragment {
 
     private Bitmap selectedImageBitmap;
 
-    public AddClothesFragment() {
+    public add_clothes() {
         // Required empty public constructor
     }
 
-    public static AddClothesFragment newInstance(String param1, String param2) {
-        AddClothesFragment fragment = new AddClothesFragment();
+    public static add_clothes newInstance(String param1, String param2) {
+        add_clothes fragment = new add_clothes();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

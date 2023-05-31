@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class delete_account extends AppCompatActivity {
 
@@ -50,6 +52,11 @@ public class delete_account extends AppCompatActivity {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
+            // Delete user data from the database
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child(user.getUid());
+            userRef.removeValue();
+
+            // Delete user account from Firebase Authentication
             user.delete()
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

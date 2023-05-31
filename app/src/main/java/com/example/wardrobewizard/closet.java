@@ -1,5 +1,6 @@
 package com.example.wardrobewizard;
 
+import android.graphics.Picture;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClosetFragment extends Fragment {
+public class closet extends Fragment {
 
     private GridView gridView;
     private PictureAdapter pictureAdapter;
@@ -29,12 +30,12 @@ public class ClosetFragment extends Fragment {
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
 
-    public ClosetFragment() {
+    public closet() {
         // Required empty public constructor
     }
 
-    public static ClosetFragment newInstance() {
-        return new ClosetFragment();
+    public static closet newInstance() {
+        return new closet();
     }
 
     @Override
