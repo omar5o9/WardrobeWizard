@@ -1,5 +1,7 @@
 package com.example.wardrobewizard;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,12 +23,16 @@ public class User {
 
     private String username;
 
-    public User() {
-        // Default constructor required for Firebase Realtime Database or Firestore
-    }
+    public User() {}
 
     public User(String userId, String firstName, String lastName, String email) {
         this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -126,10 +132,14 @@ public class User {
     }
 
     public void setUserName(String username) {
+
         this.username = username;
     }
 
     public String getUsername() {
+        if (TextUtils.isEmpty(username)) {
+            username = email;
+        }
         return username;
     }
 }

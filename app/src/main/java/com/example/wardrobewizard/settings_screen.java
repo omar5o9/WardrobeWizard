@@ -4,9 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,29 +48,26 @@ public class settings_screen extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.homepage) {
-                    // Handle closet button click
-                    // Navigate to the closet page
+                    // Handle homepage button click
+                    // Navigate to the homepage
                     Intent intent = new Intent(settings_screen.this, homepage.class);
                     startActivity(intent);
                     return true;
-
-                if (itemId == R.id.closetButton) {
+                } else if (itemId == R.id.closetButton) {
                     // Handle closet button click
                     // Navigate to the closet page
-                    intent = new Intent(settings_screen.this, closet.class);
+                    Intent intent = new Intent(settings_screen.this, closet.class);
                     startActivity(intent);
                     return true;
                 } else if (itemId == R.id.addClothesButton) {
                     // Handle add clothes button click
                     // Navigate to the add clothes page
-                    intent = new Intent(settings_screen.this, add_clothes.class);
+                    Intent intent = new Intent(settings_screen.this, add_clothes.class);
                     startActivity(intent);
                     return true;
                 } else if (itemId == R.id.settingsButton) {
-                    // Handle settings button click
-                    // Navigate to the settings page
-                    intent = new Intent(settings_screen.this, settings_screen.class);
-                    startActivity(intent);
+                    // Handle settings button click (current page)
+                    // Do nothing
                     return true;
                 }
                 return false;

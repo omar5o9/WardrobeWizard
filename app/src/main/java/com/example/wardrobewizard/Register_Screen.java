@@ -1,7 +1,6 @@
 package com.example.wardrobewizard;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,7 +28,6 @@ public class Register_Screen extends AppCompatActivity {
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
     private Button registerButton;
-    private static final int REQUEST_CODE_LOADING = 1;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference usersRef;
@@ -94,22 +93,19 @@ public class Register_Screen extends AppCompatActivity {
     }
 
     private void registerUser(final String firstName, final String lastName, final String email, String password) {
-        Intent loadingIntent = new Intent(Register_Screen.this, LoadingScreen.class);
-        startActivityForResult(loadingIntent, REQUEST_CODE_LOADING);
-
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        finishActivity(REQUEST_CODE_LOADING);
-
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             if (firebaseUser != null) {
                                 String userId = firebaseUser.getUid();
+                                String defaultUsername = email; // Set default username as email
 
-                                // Save user information to Realtime Database
+                                // Save default user information to Realtime Database
                                 User user = new User(userId, firstName, lastName, email);
+                                user.setUserName(defaultUsername);
                                 saveUserToDatabase(user);
 
                                 Toast.makeText(Register_Screen.this, "Registration successful", Toast.LENGTH_SHORT).show();
@@ -126,19 +122,27 @@ public class Register_Screen extends AppCompatActivity {
     }
 
     private void saveUserToDatabase(User user) {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://wardrobe-wizard-8fe58-default-rtdb.firebaseio.com");
-        usersRef.child("users").child(userId).setValue(user);
-    }
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+        usersRef.child(user.getUserId()).setValue(user);
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        // Update the username in the authentication user profile
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(user.getUsername())
+                    .build();
 
-        if (requestCode == REQUEST_CODE_LOADING) {
-            if (resultCode == RESULT_CANCELED) {
-                // Handle loading cancellation if needed
-            }
+            firebaseUser.updateProfile(profileUpdates)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                // Username updated successfully in the authentication user profile
+                            } else {
+                                // Failed to update the username in the authentication user profile
+                            }
+                        }
+                    });
         }
     }
 }

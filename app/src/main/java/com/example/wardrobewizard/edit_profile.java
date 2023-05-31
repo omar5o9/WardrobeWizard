@@ -43,8 +43,7 @@ public class edit_profile extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (currentUser != null) {
-                    currentUser.setFirstName(s.toString());
-                    updateHomepageUsername(s.toString());
+                    currentUser.setUserName(s.toString()); // Update username
                 }
             }
 
@@ -78,8 +77,10 @@ public class edit_profile extends AppCompatActivity {
             String firstName = extras.getString("firstName");
             String lastName = extras.getString("lastName");
             String email = extras.getString("email");
+            String defaultProfilePic = extras.getString("profilePicUrl"); // Get default profile pic URL
 
             currentUser = new User(firstName, lastName, email);
+            currentUser.setProfilePicUrl(defaultProfilePic); // Set default profile pic
             usernameEditText.setText(firstName);
             emailTextView.setText(email);
             firstNameTextView.setText(firstName);
@@ -89,14 +90,11 @@ public class edit_profile extends AppCompatActivity {
 
     private void saveChanges() {
         String newUsername = usernameEditText.getText().toString();
-        String newPhone = phoneEditText.getText().toString();
-        String newBirthday = birthdayEditText.getText().toString();
+        String newPhone = phoneEditText.getText().toString().trim(); // Allow empty values
+        String newBirthday = birthdayEditText.getText().toString().trim(); // Allow empty values
 
-        // Save the changes to the user profile (Implement your own logic here)
         if (currentUser != null) {
-            currentUser.setFirstName(newUsername);
-            currentUser.setPhone(newPhone);
-            currentUser.setBirthday(newBirthday);
+            currentUser.setUserName(newUsername); // Update username
 
             // Assuming you have a method to update the user profile in the database or make an API call
             updateUserProfile(currentUser);
@@ -107,29 +105,15 @@ public class edit_profile extends AppCompatActivity {
             // Display an error message or perform any other necessary action
             showToast("Failed to save changes. User not available.");
         }
-        currentUser.setPhone(newPhone);
-        currentUser.setBirthday(newBirthday);
-
     }
 
     private void updateUserProfile(User user) {
-        // Implement your logic to update the user profile in the database or make an API call
-
-        // Assuming you are using Firebase Realtime Database
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUserId());
-
-        // Update the user's fields
-        userRef.child("firstName").setValue(user.getFirstName());
-        userRef.child("lastName").setValue(user.getLastName());
-        userRef.child("phone").setValue(user.getPhone());
-        userRef.child("birthday").setValue(user.getBirthday());
-    }
-
-    private void updateHomepageUsername(String username) {
-        // Implement your logic to update the username displayed on the homepage
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("wardrobe-wizard-8fe58-default-rtdb").child("users").child(user.getUserId());
+        userRef.setValue(user);
     }
 
     private void showToast(String message) {
+        // Display a toast message
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
