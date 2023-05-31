@@ -9,6 +9,7 @@ import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +20,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class closet extends Fragment {
+public class closet extends AppCompatActivity {
 
     /*private GridView gridView;
     private PictureAdapter pictureAdapter;

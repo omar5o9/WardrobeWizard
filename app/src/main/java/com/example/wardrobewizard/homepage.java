@@ -61,6 +61,7 @@ public class homepage extends AppCompatActivity {
                     Intent intent = new Intent(homepage.this, closet.class);
                     startActivity(intent);
                     return true;
+
                 } else if (itemId == R.id.addClothesButton) {
                     // Handle add clothes button click
                     // Navigate to the add clothes page
@@ -101,7 +102,7 @@ public class homepage extends AppCompatActivity {
         try {
             User user = User.getCurrentUser();
             if (user != null) {
-                String username = user.getUsername();
+                String username = user.getUserName();
                 profileNameTextView.setText(username);
                 return username;
             } else {

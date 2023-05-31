@@ -24,7 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import java.io.IOException;
 
-public class add_clothes {
+public class add_clothes extends ActivityCompat {
 /*
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";

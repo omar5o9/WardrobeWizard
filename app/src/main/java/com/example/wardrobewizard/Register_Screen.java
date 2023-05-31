@@ -138,7 +138,7 @@ public class Register_Screen extends AppCompatActivity {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(user.getUsername())
+                    .setDisplayName(user.getUserName())
                     .build();
 
             firebaseUser.updateProfile(profileUpdates)

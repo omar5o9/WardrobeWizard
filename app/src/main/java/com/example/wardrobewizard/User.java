@@ -21,7 +21,7 @@ public class User {
     private String birthday;
     private String profilePicUrl;
 
-    private String username;
+    private String userName;
 
     public User() {}
 
@@ -137,18 +137,18 @@ public class User {
         return profilePicUrl;
     }
 
-    public void setUserName(String username) {
-        if (username != null) {
-            this.username = username;
+    public void setUserName(String userName) {
+        if (userName != null) {
+            this.userName = userName;
         } else {
-            this.username = "";
+            this.userName = "";
         }
     }
 
-    public String getUsername() {
-        if (TextUtils.isEmpty(username)) {
-            username = email;
+    public String getUserName() {
+        if (TextUtils.isEmpty(userName)) {
+            userName = email;
         }
-        return username;
+        return userName;
     }
 }

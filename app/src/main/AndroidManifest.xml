@@ -101,6 +101,12 @@
                   android:exported="true">
         </activity>
 
+        <activity android:name=".edit_profile"
+            android:exported="true">
+        </activity>
+
+
+
 
     </application>
 
