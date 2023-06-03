@@ -1,5 +1,7 @@
 package com.example.wardrobewizard;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -44,8 +46,7 @@ public class Forgot_Password extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Reset password email sent successfully
                             // Redirect the user to the change password page
-                            Intent intent = new Intent(Forgot_Password.this, Change_Password.class);
-                            startActivity(intent);
+                            showResetEmailSentDialog();
                         } else {
                             // Reset password email sending failed
                             // Show an error message or handle the failure
@@ -53,5 +54,33 @@ public class Forgot_Password extends AppCompatActivity {
                         }
                     }
                 });
+    }
+    private void showResetEmailSentDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Email Sent");
+        builder.setMessage("An email with instructions to reset your password has been sent.");
+
+        builder.setPositiveButton("Resend", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                // Clear the email field
+                emailEditText.setText("");
+                // Allow the user to enter the email again for resending the reset password email
+            }
+        });
+
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                // Go back to the login screen
+                Intent intent = new Intent(Forgot_Password.this, Login_Screen.class);
+                startActivity(intent);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

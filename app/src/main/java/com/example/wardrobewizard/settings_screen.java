@@ -181,11 +181,4 @@ public class settings_screen extends AppCompatActivity {
         // Display a toast message
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
-    @Override
-    public void onBackPressed() {
-        // Handle back press to prevent accidental sign out
-        // Display the sign-out confirmation dialog
-        performSignOut();
-    }
 }
