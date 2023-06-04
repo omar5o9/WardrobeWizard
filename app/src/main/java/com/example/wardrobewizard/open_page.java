@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class open_page extends AppCompatActivity {
 
-    private static final int LOADING_DURATION = 4000; // 5 seconds
+    private static final int LOADING_DURATION = 3500; // 5 seconds
     private ProgressBar loadingProgressBar;
     private int progressStatus = 0;
     private Handler handler = new Handler();
