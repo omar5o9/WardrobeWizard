@@ -16,97 +16,25 @@
         <activity
             android:name=".Login_Screen"
             android:exported="true">
+
+            <!-- Remove the existing intent-filter -->
+            <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+        </activity>
+
+        <activity
+            android:name=".open_page"
+            android:exported="true">
+            <!-- Add the intent-filter to make open_page the launcher activity -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".Register_Screen"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".Forgot_Password"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".Change_Password"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".homepage"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".closet"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".add_clothes"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".settings_screen"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".outifit_creator"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".laundry_basket"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".calendar"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".stats"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".delete_account"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".privacy_policy"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".service_terms"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".ProfilePic"
-            android:exported="true">
-        </activity>
-
-        <activity android:name=".LoadingScreen"
-                  android:exported="true">
-        </activity>
-
-        <activity android:name=".edit_profile"
-            android:exported="true">
-        </activity>
-
-
-
+        <!-- Rest of your activities -->
 
     </application>
 

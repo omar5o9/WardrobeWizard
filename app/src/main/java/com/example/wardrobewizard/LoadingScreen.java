@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoadingScreen extends AppCompatActivity {
 
-    private static final int LOADING_DURATION = 2000; // 2 seconds
+    private static final int LOADING_DURATION = 5000; // 2 seconds
     private LoadUserDataTask loadUserDataTask;
 
     @Override
