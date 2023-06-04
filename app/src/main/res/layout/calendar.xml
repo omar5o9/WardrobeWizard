@@ -1,39 +1,286 @@
-<!-- closet.xml -->
+<!-- planner.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Top Navigation Menu -->
+    <LinearLayout
+        android:id="@+id/navigationMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <!-- Add your logo or app name at the top -->
+        <TextView
+            android:id="@+id/logoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:fontFamily="serif"
+            android:padding="16dp"
+            android:text="Wardrobe Wizard"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+    <!-- Add your buttons with a tab bar style -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/black">
+
+        <Button
+            android:id="@+id/plannerButton"
+            style="@style/Widget.MaterialComponents.TimePicker.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Planner"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/calendarButton"
+            style="@style/Widget.MaterialComponents.TimePicker.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Calendar"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <!-- Week Planner -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/navigationMenu"
+        android:orientation="vertical">
+
+        <!-- Monday -->
         <LinearLayout
+            android:id="@+id/mondayLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnAddClothes"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Clothes"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:onClick="onAddClothesClicked" />
+                android:text="Monday"
+                android:textSize="16sp" />
 
-          
+            <!-- Dropdown menu for names -->
+            <Spinner
+                android:id="@+id/mondayDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-            <LinearLayout
-                android:id="@+id/photoContainer"
+            <!-- Add notes section -->
+            <EditText
+                android:id="@+id/mondayNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-                <!-- Photos will be dynamically added here -->
-            </LinearLayout>
+                android:hint="Add notes" />
 
         </LinearLayout>
+
+        <!-- Tuesday -->
+        <!-- Add layout for Tuesday similar to Monday -->
+        <LinearLayout
+            android:id="@+id/tuesdayLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tuesday" />
+
+            <!-- Dropdown menu for names -->
+            <Spinner
+                android:id="@+id/tuesdayDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Add notes section -->
+            <EditText
+                android:id="@+id/tuesdayNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Add notes" />
+
+        </LinearLayout>
+
+        <!-- Wednesday -->
+        <!-- Add layout for Wednesday similar to Monday -->
+        <LinearLayout
+            android:id="@+id/wednesdayLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wednesday" />
+
+            <!-- Dropdown menu for names -->
+            <Spinner
+                android:id="@+id/wednesdayDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Add notes section -->
+            <EditText
+                android:id="@+id/wednesdayNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Add notes" />
+
+        </LinearLayout>
+
+        <!-- Thursday -->
+        <!-- Add layout for Thursday similar to Monday -->
+        <LinearLayout
+            android:id="@+id/thursdayLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thursday" />
+
+            <!-- Dropdown menu for names -->
+            <Spinner
+                android:id="@+id/thursdayDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Add notes section -->
+            <EditText
+                android:id="@+id/thursdayNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Add notes" />
+
+        </LinearLayout>
+
+        <!-- Friday -->
+        <!-- Add layout for Friday similar to Monday -->
+        <LinearLayout
+            android:id="@+id/fridayLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friday" />
+
+            <!-- Dropdown menu for names -->
+            <Spinner
+                android:id="@+id/fridayDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Add notes section -->
+            <EditText
+                android:id="@+id/fridayNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Add notes" />
+
+        </LinearLayout>
+
+        <!-- Saturday -->
+        <!-- Add layout for Saturday similar to Monday -->
+        <LinearLayout
+            android:id="@+id/saturdayLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saturday" />
+
+            <!-- Dropdown menu for names -->
+            <Spinner
+                android:id="@+id/saturdayDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Add notes section -->
+            <EditText
+                android:id="@+id/saturdayNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Add notes" />
+
+        </LinearLayout>
+
+        <!-- Sunday -->
+        <!-- Add layout for Sunday similar to Monday -->
+        <LinearLayout
+            android:id="@+id/sundayLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sunday" />
+
+            <!-- Dropdown menu for names -->
+            <Spinner
+                android:id="@+id/sundayDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Add notes section -->
+            <EditText
+                android:id="@+id/notesEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Add notes"
+                android:padding="16dp" />
+
+        </LinearLayout>
+
+        <!-- Add save button -->
+        <Button
+            android:id="@+id/saveButton"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:backgroundTint="@color/black"
+            android:padding="16dp"
+            android:text="Save"
+            android:textColor="@color/white"
+            app:iconTint="@color/black"
+            app:rippleColor="@color/black" />
+
+    </LinearLayout>
+
+    </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>
