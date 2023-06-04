@@ -106,7 +106,8 @@ public class homepage extends AppCompatActivity {
                 profileNameTextView.setText(username);
                 return username;
             } else {
-                throw new Exception("User object is null.");
+                //throw new Exception("User object is null.");
+                return user.getEmail();
             }
         } catch (Exception e) {
             Toast.makeText(this, "Error getting current username: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -133,7 +134,6 @@ public class homepage extends AppCompatActivity {
 
     private void loadProfilePicture() {
         try {
-            // Assuming you have a reference to the user object in the homepage activity
             User user = User.getCurrentUser();
 
             // Check if the user object is not null

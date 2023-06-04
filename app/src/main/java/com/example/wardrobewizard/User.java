@@ -20,7 +20,6 @@ public class User {
     private String phone;
     private String birthday;
     private String profilePicUrl;
-
     private String userName;
 
     public User() {}
@@ -86,6 +85,7 @@ public class User {
         this.birthday = birthday;
     }
 
+
     public static String getCurrentUserId() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
@@ -100,7 +100,7 @@ public class User {
         String currentUserId = getCurrentUserId();
         if (currentUserId != null) {
             // Implement the logic to retrieve the user object from the Realtime Database
-            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
             usersRef.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -108,11 +108,8 @@ public class User {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null) {
                             user.setProfilePicUrl(dataSnapshot.child("profilePictureUrl").getValue(String.class));
-                            // Display the user information or update the UI
-                            // Example: updateUI(user);
-                            // ...
                         } else {
-                            throw new RuntimeException("User data is null.");
+                            throw new RuntimeException("User data is null, GETCURRENT USER CLASS");
                         }
                     }
                 }
@@ -128,12 +125,16 @@ public class User {
     }
 
     public void setProfilePicUrl(String url) {
-        // Fetch the profile picture from Firebase Storage or Realtime Database
-        // Implement the necessary logic here to retrieve and save the profile picture
-        this.profilePicUrl = url;
+        if (url != null) {
+            this.profilePicUrl = url;
+        } else {
+            // Handle the case when the profile picture URL is null
+            this.profilePicUrl = "https://storage.googleapis.com/wardrobe-wizard-8fe58.appspot.com/profile%20pic.jpg";
+        }
     }
 
     public String getProfilePicUrl() {
+
         return profilePicUrl;
     }
 

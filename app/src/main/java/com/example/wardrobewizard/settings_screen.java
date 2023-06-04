@@ -50,7 +50,7 @@ public class settings_screen extends AppCompatActivity {
     }
 
     private void setBottomNavigationView() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomMenu);
 
         bottomNavigationView.setSelectedItemId(R.id.settingsButton);
 
