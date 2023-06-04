@@ -4,8 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -13,7 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoadingScreen extends AppCompatActivity {
 
-    private static final int LOADING_DURATION = 4000; // 2 seconds
+    private static final int LOADING_DURATION = 3000; // 3 seconds
     private LoadUserDataTask loadUserDataTask;
 
     @Override
@@ -21,22 +20,23 @@ public class LoadingScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_screen);
 
-        // Show a progress indicator or animation to indicate loading
-        // (Add your code here)
-
         // Simulate loading process in the background
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                // Perform any initialization tasks or data loading operations here
-                // For example, you can fetch user information or other data from the database
+                try {
+                    Thread.sleep(LOADING_DURATION);
 
-                // Start the AsyncTask to load user data
-                loadUserDataTask = new LoadUserDataTask();
-                loadUserDataTask.execute();
+                    // Start the AsyncTask to load user data
+                    loadUserDataTask = new LoadUserDataTask();
+                    loadUserDataTask.execute();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        }, LOADING_DURATION);
+        }).start();
     }
+
 
     private void loadHomepage(User user) {
         if (user != null) {
@@ -57,8 +57,6 @@ public class LoadingScreen extends AppCompatActivity {
         @Override
         protected User doInBackground(Void... voids) {
             try {
-                // Perform any data loading or initialization tasks here
-                // For example, fetch user information from Firebase Authentication or a database
 
                 // Get the currently authenticated user
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

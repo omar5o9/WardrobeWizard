@@ -2,6 +2,7 @@ package com.example.wardrobewizard;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -87,11 +88,15 @@ public class ProfilePic extends Activity {
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null && hasCamera()) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         } else {
             Toast.makeText(this, "No camera app found", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private boolean hasCamera() {
+        return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
     }
 
     private void pickImageFromGallery() {

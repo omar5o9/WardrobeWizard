@@ -24,34 +24,26 @@ public class edit_profile extends AppCompatActivity implements UserCallback {
     private EditText phoneEditText;
     private EditText birthdayEditText;
     private Button saveChangesButton;
-
     private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile);
-
         initializeViews();
         User.getCurrentUser(this);
 
         usernameEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // No action needed
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (currentUser != null) {
                     currentUser.setUserName(s.toString()); // Update username
                 }
             }
-
             @Override
-            public void afterTextChanged(Editable s) {
-                // No action needed
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
         saveChangesButton.setOnClickListener(new View.OnClickListener() {
@@ -73,14 +65,19 @@ public class edit_profile extends AppCompatActivity implements UserCallback {
     }
 
     private void saveChanges() {
-        String newUsername = usernameEditText.getText().toString();
+        String newUsername = usernameEditText.getText().toString().trim();
         String newPhone = phoneEditText.getText().toString().trim(); // Allow empty values
-        String newBirthday = birthdayEditText.getText().toString().trim(); // Allow empty values
+        String newBirthday = birthdayEditText.getText().toString().trim(); //allows empty values
+        String newFirstName = firstNameTextView.getText().toString().trim();
+        String newLastName = lastNameTextView.getText().toString().trim();
+
 
         if (currentUser != null) {
             currentUser.setUserName(newUsername); // Update username
             currentUser.setPhone(newPhone); // Update phone
             currentUser.setBirthday(newBirthday); // Update birthday
+            currentUser.setFirstName(newFirstName);
+            currentUser.setLastName(newLastName);
 
             updateUserProfile(currentUser);
             // Display a success message
@@ -96,7 +93,7 @@ public class edit_profile extends AppCompatActivity implements UserCallback {
 
     private void updateUserProfile(User user) {
         try {
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("wardrobe-wizard-8fe58-default-rtdb").child("users").child(user.getUserId());
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUserId());
             userRef.setValue(user);
         } catch (Exception e) {
             // Handle the exception or display an error message
@@ -105,7 +102,6 @@ public class edit_profile extends AppCompatActivity implements UserCallback {
     }
 
     private void showToast(String message) {
-        // Display a toast message
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 

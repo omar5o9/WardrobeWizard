@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
@@ -134,6 +135,7 @@ public class homepage extends AppCompatActivity implements UserCallback {
         } catch (Exception e) {
             Toast.makeText(this, "Error loading profile picture: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+        profileImageButton.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
     }
 
     @Override

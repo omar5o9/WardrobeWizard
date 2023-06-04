@@ -1,9 +1,7 @@
 package com.example.wardrobewizard;
 
 import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -139,7 +137,7 @@ public class User {
             this.profilePicUrl = url;
         } else {
             // Handle the case when the profile picture URL is null
-            this.profilePicUrl = "https://storage.googleapis.com/wardrobe-wizard-8fe58.appspot.com/profile%20pic.jpg";
+            this.profilePicUrl = "https://storage.googleapis.com/wardrobe-wizard-8fe58.appspot.com/funnypic.jpg";
         }
     }
 
