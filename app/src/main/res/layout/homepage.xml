@@ -20,6 +20,8 @@
         android:layout_height="66dp"
         android:background="@color/white"
         app:itemHorizontalTranslationEnabled="false"
+        app:itemIconTint="@android:color/system_accent2_700"
+        app:itemRippleColor="#1976D2"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
