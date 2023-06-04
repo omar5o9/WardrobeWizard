@@ -16,4 +16,11 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="wardrobe_wizard">Wardrobe Wizard</string>
+    <string name="profile_name">Profile Name</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="outfits">Outfits</string>
+    <string name="planner">Planner</string>
+    <string name="laundry">Laundry</string>
+    <string name="stats">Stats</string>
 </resources>
