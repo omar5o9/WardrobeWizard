@@ -12,6 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+
 public class User {
     private String userId;
     private String firstName;
@@ -70,7 +72,11 @@ public class User {
     }
 
     public String getPhone() {
+        if(this.phone != null)
         return phone;
+        else
+            this.phone = "";
+        return this.phone;
     }
 
     public void setPhone(String phone) {
@@ -78,7 +84,12 @@ public class User {
     }
 
     public String getBirthday() {
+        if(this.birthday != null)
         return birthday;
+        else {
+            this.birthday = "";
+        }
+        return this.birthday;
     }
 
     public void setBirthday(String birthday) {
@@ -96,10 +107,9 @@ public class User {
         }
     }
 
-    public static User getCurrentUser() {
+    public static void getCurrentUser(final UserCallback callback) {
         String currentUserId = getCurrentUserId();
         if (currentUserId != null) {
-            // Implement the logic to retrieve the user object from the Realtime Database
             DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
             usersRef.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -107,9 +117,10 @@ public class User {
                     if (dataSnapshot.exists()) {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null) {
-                            user.setProfilePicUrl(dataSnapshot.child("profilePictureUrl").getValue(String.class));
+                            user.setProfilePicUrl(dataSnapshot.child("profilePicUrl").getValue(String.class));
+                            callback.onUserReceived(user); // Pass the user object to the callback
                         } else {
-                            throw new RuntimeException("User data is null, GETCURRENT USER CLASS");
+                            throw new RuntimeException("User data is null, getCurrentUser");
                         }
                     }
                 }
@@ -121,7 +132,6 @@ public class User {
                 }
             });
         }
-        return null;
     }
 
     public void setProfilePicUrl(String url) {
@@ -134,22 +144,27 @@ public class User {
     }
 
     public String getProfilePicUrl() {
-
         return profilePicUrl;
     }
 
     public void setUserName(String userName) {
         if (userName != null) {
-            this.userName = userName;
+            // Remove domain part from email
+            int atIndex = userName.indexOf('@');
+            if (atIndex != -1) {
+                this.userName = userName.substring(0, atIndex);
+            } else {
+                this.userName = userName;
+            }
         } else {
-            this.userName = "";
+            this.userName = "Set Username is bad";
         }
     }
 
     public String getUserName() {
         if (TextUtils.isEmpty(userName)) {
-            userName = email;
+            this.userName = getEmail();
         }
-        return userName;
+        return this.userName;
     }
 }

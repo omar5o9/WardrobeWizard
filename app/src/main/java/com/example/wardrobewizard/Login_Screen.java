@@ -107,8 +107,6 @@ public class Login_Screen extends AppCompatActivity {
                 .addOnFailureListener(this, new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Login_Screen.this, "Failed to login: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        finishActivity(REQUEST_CODE_LOADING);
                     }
                 });
     }
@@ -138,7 +136,7 @@ public class Login_Screen extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(Login_Screen.this, "Failed to retrieve user profile", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login_Screen.this, " Failed to retrieve user profile", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#7586F6">
 
     <ImageView
         android:id="@+id/profileImageView"
@@ -33,6 +34,7 @@
         android:layout_marginEnd="133dp"
         android:layout_marginBottom="8dp"
         android:text="Choose Photo"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/choosePhotoButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,6 +51,7 @@
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="2dp"
         android:text="Take Photo"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/takePhotoButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,8 +79,10 @@
         android:layout_height="59dp"
         android:layout_marginStart="149dp"
         android:layout_marginEnd="149dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="100dp"
+        android:background="@color/black"
         android:text="Save"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

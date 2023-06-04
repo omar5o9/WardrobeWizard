@@ -96,18 +96,10 @@ public class settings_screen extends AppCompatActivity {
             public void onClick(View v) {
                 // Navigate to the Edit Profile page
                 Intent intent = new Intent(settings_screen.this, edit_profile.class);
-
-                // Pass any necessary extras
-                if (currentUser != null) {
-                    intent.putExtra("firstName", currentUser.getFirstName());
-                    intent.putExtra("lastName", currentUser.getLastName());
-                    intent.putExtra("email", currentUser.getEmail());
-                    startActivity(intent);
-                } else {
-                    showToast("User data not available. Cannot edit profile.");
-                }
+                startActivity(intent);
             }
         });
+
 
         deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override

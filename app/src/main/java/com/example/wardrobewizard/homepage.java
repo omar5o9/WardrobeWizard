@@ -11,11 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.auth.FirebaseAuth;
 
-public class homepage extends AppCompatActivity {
+public class homepage extends AppCompatActivity implements UserCallback {
 
     private ImageButton profileImageButton;
     private TextView profileNameTextView;
@@ -98,66 +95,8 @@ public class homepage extends AppCompatActivity {
         });
     }
 
-    private String getCurrentUsername() {
-        try {
-            User user = User.getCurrentUser();
-            if (user != null) {
-                String username = user.getUserName();
-                profileNameTextView.setText(username);
-                return username;
-            } else {
-                //throw new Exception("User object is null.");
-                return user.getEmail();
-            }
-        } catch (Exception e) {
-            Toast.makeText(this, "Error getting current username: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            return "";
-        }
-    }
 
 
-    private void saveUserToDatabase(User user) {
-        try {
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            if (TextUtils.isEmpty(userId)) {
-                throw new Exception("Current user ID is null or empty.");
-            }
-            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
-            usersRef.child(userId).setValue(user);
-
-            // Store the user's profile picture in Firebase Storage
-            // Implement the necessary logic here
-        } catch (Exception e) {
-            Toast.makeText(this, "Error saving user to database: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void loadProfilePicture() {
-        try {
-            User user = User.getCurrentUser();
-
-            // Check if the user object is not null
-            if (user != null) {
-                // Get the user's profile picture URL
-                String profilePictureUrl = user.getProfilePicUrl();
-
-                // Check if the user has a profile picture URL
-                if (!TextUtils.isEmpty(profilePictureUrl)) {
-                    // Load the user's profile picture using Glide or any other image loading library
-                    Glide.with(this)
-                            .load(profilePictureUrl)
-                            .into(profileImageButton);
-                } else {
-                    // If the user does not have a profile picture, load the default profile picture
-                    profileImageButton.setImageResource(R.drawable.profile_pic);
-                }
-            } else {
-                throw new Exception("User object is null.");
-            }
-        } catch (Exception e) {
-            Toast.makeText(this, "Error loading profile picture: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -177,6 +116,47 @@ public class homepage extends AppCompatActivity {
                     Toast.makeText(homepage.this, "Failed to load profile picture", Toast.LENGTH_SHORT).show();
                 }
             }
+        }
+    }
+
+    private String getCurrentUsername() {
+        try {
+            User.getCurrentUser(this);
+        } catch (Exception e) {
+            Toast.makeText(this, "Error getting current username: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return "";
+    }
+
+    private void loadProfilePicture() {
+        try {
+            User.getCurrentUser(this);
+        } catch (Exception e) {
+            Toast.makeText(this, "Error loading profile picture: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onUserReceived(User user) {
+        try {
+            if (user != null) {
+                String username = user.getUserName();
+                profileNameTextView.setText(username);
+
+                String profilePictureUrl = user.getProfilePicUrl();
+
+                if (!TextUtils.isEmpty(profilePictureUrl)) {
+                    Glide.with(this)
+                            .load(profilePictureUrl)
+                            .into(profileImageButton);
+                } else {
+                    profileImageButton.setImageResource(R.drawable.profile_pic);
+                }
+            } else {
+                throw new Exception("User object is null.");
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Error loading profile picture: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }

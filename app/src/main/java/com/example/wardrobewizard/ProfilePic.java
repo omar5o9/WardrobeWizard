@@ -189,7 +189,7 @@ public class ProfilePic extends Activity {
                 }
             });
         } else {
-            Toast.makeText(this, "User reference is null", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "PROFILE PIC User reference is null", Toast.LENGTH_SHORT).show();
         }
     }
 }

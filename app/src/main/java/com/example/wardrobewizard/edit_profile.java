@@ -1,5 +1,6 @@
 package com.example.wardrobewizard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class edit_profile extends AppCompatActivity {
+public class edit_profile extends AppCompatActivity implements UserCallback {
 
     private EditText usernameEditText;
     private TextView emailTextView;
@@ -32,7 +33,7 @@ public class edit_profile extends AppCompatActivity {
         setContentView(R.layout.edit_profile);
 
         initializeViews();
-        setInitialValues();
+        User.getCurrentUser(this);
 
         usernameEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -63,29 +64,12 @@ public class edit_profile extends AppCompatActivity {
 
     private void initializeViews() {
         usernameEditText = findViewById(R.id.editTextText);
-        emailTextView = findViewById(R.id.textView15);
-        firstNameTextView = findViewById(R.id.textView16);
-        lastNameTextView = findViewById(R.id.textView17);
+        emailTextView = findViewById(R.id.editTextTextEmailAddress2);
+        firstNameTextView = findViewById(R.id.editTextText3);
+        lastNameTextView = findViewById(R.id.editTextText4);
         phoneEditText = findViewById(R.id.editTextPhone);
         birthdayEditText = findViewById(R.id.editTextDate2);
         saveChangesButton = findViewById(R.id.button3);
-    }
-
-    private void setInitialValues() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String firstName = extras.getString("firstName");
-            String lastName = extras.getString("lastName");
-            String email = extras.getString("email");
-            String defaultProfilePic = extras.getString("profilePicUrl"); // Get default profile pic URL
-
-            currentUser = new User(firstName, lastName, email);
-            currentUser.setProfilePicUrl(defaultProfilePic); // Set default profile pic
-            usernameEditText.setText(firstName);
-            emailTextView.setText(email);
-            firstNameTextView.setText(firstName);
-            lastNameTextView.setText(lastName);
-        }
     }
 
     private void saveChanges() {
@@ -95,12 +79,15 @@ public class edit_profile extends AppCompatActivity {
 
         if (currentUser != null) {
             currentUser.setUserName(newUsername); // Update username
+            currentUser.setPhone(newPhone); // Update phone
+            currentUser.setBirthday(newBirthday); // Update birthday
 
-            // Assuming you have a method to update the user profile in the database or make an API call
             updateUserProfile(currentUser);
-
             // Display a success message
             showToast("Changes saved successfully");
+            Intent intent = new Intent(edit_profile.this, homepage.class);
+            startActivity(intent);
+            finish();
         } else {
             // Display an error message or perform any other necessary action
             showToast("Failed to save changes. User not available.");
@@ -120,5 +107,21 @@ public class edit_profile extends AppCompatActivity {
     private void showToast(String message) {
         // Display a toast message
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onUserReceived(User user) {
+        currentUser = user;
+       populateInitialValues();
+    }
+    private void populateInitialValues() {
+        if (currentUser != null) {
+            usernameEditText.setText(currentUser.getUserName());
+            emailTextView.setText(currentUser.getEmail());
+            firstNameTextView.setText(currentUser.getFirstName());
+            lastNameTextView.setText(currentUser.getLastName());
+            phoneEditText.setText(currentUser.getPhone());
+            birthdayEditText.setText(currentUser.getBirthday());
+        }
     }
 }
