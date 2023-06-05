@@ -1,4 +1,4 @@
-package com.example.wardrobewizard;
+package values.wardrobewizard;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,12 +7,13 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wardrobewizard.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoadingScreen extends AppCompatActivity {
 
-    private static final int LOADING_DURATION = 5000; // 3 seconds
+    private static final int LOADING_DURATION = 3000; // 3 seconds
     private LoadUserDataTask loadUserDataTask;
 
     @Override

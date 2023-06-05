@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_1"
     android:orientation="vertical"
-    tools:context="com.example.wardrobewizard.Login_Screen">
+    tools:context="com.example.wardrobewizard.values.wardrobewizard.Login_Screen">
 
     <ImageView
         android:id="@+id/imageView7"

@@ -7,23 +7,23 @@
 
     <fragment
         android:id="@+id/homepage"
-        android:name="com.example.wardrobewizard.homepage"
+        android:name="values.wardrobewizard.homepage"
         android:label="fragment_homepage"
         tools:layout="@layout/homepage" />
 
     <fragment
         android:id="@+id/addClothesButton"
-        android:name="com.example.wardrobewizard.add_clothes"
+        android:name="values.wardrobewizard.add_clothes"
         android:label="fragment_add_clothes"
         tools:layout="@layout/add_clothes" />
     <fragment
         android:id="@+id/closetButton"
-        android:name="com.example.wardrobewizard.closet"
+        android:name="values.wardrobewizard.closet"
         android:label="fragment_view_closet"
         tools:layout="@layout/closet" />
     <fragment
         android:id="@+id/settingsButton"
-        android:name="com.example.wardrobewizard.settings_screen"
+        android:name="values.wardrobewizard.settings_screen"
         android:label="fragment_settings"
         tools:layout="@layout/settings" />
 </navigation>

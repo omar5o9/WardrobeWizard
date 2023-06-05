@@ -1,4 +1,4 @@
-package com.example.wardrobewizard;
+package values.wardrobewizard;
 
 import android.Manifest;
 import android.app.Activity;

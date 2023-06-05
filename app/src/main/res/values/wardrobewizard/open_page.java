@@ -1,10 +1,12 @@
-package com.example.wardrobewizard;
+package values.wardrobewizard;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.wardrobewizard.R;
 
 public class open_page extends AppCompatActivity {
 

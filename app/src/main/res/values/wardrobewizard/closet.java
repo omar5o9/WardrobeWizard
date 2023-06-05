@@ -1,4 +1,4 @@
-package com.example.wardrobewizard;
+package values.wardrobewizard;
 
 import android.graphics.Picture;
 import android.os.Bundle;

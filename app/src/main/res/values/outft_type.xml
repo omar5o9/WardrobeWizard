@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="outfit_types">
+        <item>Outfit 1</item>
+        <item>Outfit 2</item>
+        <item>Outfit 3</item>
+        <!-- Add more items as needed -->
+    </string-array>
+</resources>

@@ -1,5 +1,8 @@
-package com.example.wardrobewizard;
+package values.wardrobewizard;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,9 +13,9 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wardrobewizard.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +34,11 @@ public class Planner extends AppCompatActivity {
             thursdayDropdown, fridayDropdown, saturdayDropdown, sundayDropdown;
     private EditText mondayNotes, tuesdayNotes, wednesdayNotes,
             thursdayNotes, fridayNotes, saturdayNotes, sundayNotes;
+    private Button plannerButton;
+    private Button outfitsButton;
+    private Button calendarButton;
     private Button saveButton;
+    private Button newWeekButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +49,11 @@ public class Planner extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         currentUser = mAuth.getCurrentUser();
 
-        ImageButton backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        plannerButton = findViewById(R.id.plannerButton);
+        outfitsButton = findViewById(R.id.outfitsButton);
+        calendarButton = findViewById(R.id.calendarButton);
+        saveButton = findViewById(R.id.saveButton);
+        newWeekButton = findViewById(R.id.saveButton2);
 
         mondayDropdown = findViewById(R.id.mondayDropdown);
         tuesdayDropdown = findViewById(R.id.tuesdayDropdown);
@@ -66,18 +71,56 @@ public class Planner extends AppCompatActivity {
         saturdayNotes = findViewById(R.id.saturdayNotes);
         sundayNotes = findViewById(R.id.sundayNotes);
 
-        saveButton = findViewById(R.id.saveButton);
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        plannerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Do nothing as we are already on the Planner page
+            }
+        });
+
+        outfitsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the Outfit Creator activity
+                startActivity(new Intent(Planner.this, outifit_creator.class));
+            }
+        });
+
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the Calendar activity
+                startActivity(new Intent(Planner.this, calendar.class));
+            }
+        });
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                savePlannerData();
+                // Show a dialog box to confirm saving
+                showSaveConfirmationDialog();
+            }
+        });
+
+        newWeekButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Clear all previous information and show a blank planner
                 clearPlanner();
-                Toast.makeText(Planner.this, "Planner data saved.", Toast.LENGTH_SHORT).show();
             }
         });
 
         // Set up dropdown menus
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getOutfitNames());
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.outfit_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mondayDropdown.setAdapter(adapter);
@@ -88,12 +131,11 @@ public class Planner extends AppCompatActivity {
         saturdayDropdown.setAdapter(adapter);
         sundayDropdown.setAdapter(adapter);
 
-        // Set up selection listener for dropdown menus
+        // Set up dropdown selection listener
         AdapterView.OnItemSelectedListener dropdownListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                Toast.makeText(Planner.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+                // Handle dropdown selection
             }
 
             @Override
@@ -110,10 +152,24 @@ public class Planner extends AppCompatActivity {
         saturdayDropdown.setOnItemSelectedListener(dropdownListener);
         sundayDropdown.setOnItemSelectedListener(dropdownListener);
     }
-
     private String[] getOutfitNames() {
         // Replace this with your own implementation to retrieve outfit names from Firebase or any other source
         return new String[]{"Outfit 1", "Outfit 2", "Outfit 3"};
+    }
+
+    private void showSaveConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Save Planner");
+        builder.setMessage("Are you sure you want to save the planner?");
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                savePlannerData();
+                Toast.makeText(Planner.this, "Planner saved", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
     }
 
     private void savePlannerData() {

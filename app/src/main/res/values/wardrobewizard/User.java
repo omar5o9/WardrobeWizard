@@ -1,4 +1,4 @@
-package com.example.wardrobewizard;
+package values.wardrobewizard;
 
 import android.text.TextUtils;
 import androidx.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.example.wardrobewizard;
+package values.wardrobewizard;
 import java.util.HashMap;
 import java.util.Map;
 
