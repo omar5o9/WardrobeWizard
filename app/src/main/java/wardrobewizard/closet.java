@@ -1,83 +1,190 @@
 package wardrobewizard;
 
-import android.graphics.Picture;
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.GridView;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
+import com.example.wardrobewizard.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class closet extends AppCompatActivity {
 
-    /*private GridView gridView;
-    private PictureAdapter pictureAdapter;
-    private List<Picture> pictureList;
+    // Views
+    private TextView titleTextView;
+    private TextView allTextView;
+    private TextView shirtsTextView;
+    private TextView pantsTextView;
+    private TextView shoesTextView;
+    private TextView accessoriesTextView;
+    private Button sortButton;
+    private ImageView imageView;
+    private EditText factsEditText;
+    private Spinner sizeSpinner;
+    private Spinner colorSpinner;
+    private Spinner styleSpinner;
+    private TextView priceTextView;
+    private EditText priceEditText;
+    private Button addMoreButton;
 
+    private ImageButton home;
+
+    // Database
+    private FirebaseDatabase database;
+    private DatabaseReference itemsRef;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
-    private FirebaseStorage firebaseStorage;
-    private StorageReference storageReference;
-
-    public closet() {
-        // Required empty public constructor
-    }
-
-    public static closet newInstance() {
-        return new closet();
-    }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.closet);
 
-        // Initialize Firebase components
+        // Initialize views
+        home =findViewById(R.id.homeButton);
+        titleTextView = findViewById(R.id.titleTextView);
+        allTextView = findViewById(R.id.allTextView);
+        shirtsTextView = findViewById(R.id.shirtsTextView);
+        pantsTextView = findViewById(R.id.pantsTextView);
+        shoesTextView = findViewById(R.id.shoesTextView);
+        accessoriesTextView = findViewById(R.id.accessoriesTextView);
+        sortButton = findViewById(R.id.sortButton);
+        imageView = findViewById(R.id.imageView);
+        factsEditText = findViewById(R.id.factsEditText);
+        sizeSpinner = findViewById(R.id.sizeSpinner);
+        colorSpinner = findViewById(R.id.colorSpinner);
+        styleSpinner = findViewById(R.id.styleSpinner);
+        priceTextView = findViewById(R.id.priceSpinner);
+        priceEditText = findViewById(R.id.editTextText2);
+        addMoreButton = findViewById(R.id.addMoreButton);
+
+        // Initialize Firebase
+        database = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference().child("users").child(currentUser.getUid()).child("pictures");
 
-        // Initialize picture list
-        pictureList = new ArrayList<>();
+        if (currentUser == null) {
+            // User is not authenticated, redirect to login screen or handle as required
+        } else {
+            // User is authenticated, initialize database reference
+            String userId = currentUser.getUid();
+            itemsRef = database.getReference().child("users").child(userId).child("items");
+        }
 
-        // Create the picture adapter
-        pictureAdapter = new PictureAdapter(requireContext(), pictureList);
+        // Set listeners
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSortDisabledDialog();
+            }
+        });
+
+        addMoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddingMoreDisabledDialog();
+            }
+        });
+
+        // TODO: Implement navigation logic
+        allTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle All tab click
+                // nothing already here
+            }
+        });
+
+        shirtsTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle Shirts tab click
+                Intent intent = new Intent(closet.this, shirts.class);
+                startActivity(intent);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle Shirts tab click
+                Intent intent = new Intent(closet.this, homepage.class);
+                startActivity(intent);
+            }
+        });
+
+        pantsTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle Pants tab click
+                Intent intent = new Intent(closet.this, pants.class);
+                startActivity(intent);
+            }
+        });
+
+        shoesTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle Shoes tab click
+                Intent intent = new Intent(closet.this, shoes.class);
+                startActivity(intent);
+            }
+        });
+
+        accessoriesTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle Accessories tab click
+                Intent intent = new Intent(closet.this, other_clothes.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.closet, container, false);
-
-        gridView = view.findViewById(R.id.gridView);
-        gridView.setAdapter(pictureAdapter);
-
-        // Retrieve and display the pictures from Firebase Storage
-        retrievePictures();
-
-        return view;
+    private void showSortDisabledDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sort")
+                .setMessage("Sort is disabled")
+                .setPositiveButton("OK", null)
+                .show();
     }
 
-    private void retrievePictures() {
-        // TODO: Retrieve pictures from Firebase Storage for the authorized user
-        // You can use the storageReference to access the pictures in the storage
-        // Add the retrieved pictures to the pictureList and notify the adapter
+    private void showAddingMoreDisabledDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Add More")
+                .setMessage("Adding more is disabled")
+                .setPositiveButton("OK", null)
+                .show();
+    }
 
-        // Example code to add a sample picture
-        Picture picture = new Picture("picture_url", "description", "color", "size", "style", "price");
-        pictureList.add(picture);
-        pictureAdapter.notifyDataSetChanged();
-    }*/
+    private void saveItemToDatabase(ClipData.Item item) {
+        if (itemsRef != null) {
+            String itemId = itemsRef.push().getKey();
+            if (itemId != null) {
+                itemsRef.child(itemId).setValue(item);
+                Toast.makeText(this, "Item saved successfully", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // TODO: Implement other methods and functionality as required
 }

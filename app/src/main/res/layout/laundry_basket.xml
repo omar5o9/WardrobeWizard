@@ -1,39 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="104dp"
+        android:layout_marginBottom="76dp"
+        android:background="#1976D2"
+        android:elevation="2dp"
+        android:padding="20dp"
         android:text="Laundry Basket"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="63dp" />
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView34"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="265dp"
         android:text="Worn Last Week"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="339dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="440dp" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="260dp"
         android:text="Worn This Month"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="529dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="615dp" />
 
     <TextView
         android:id="@+id/textView34"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="269dp"
         android:text="Worn This Week"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="174dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="140dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="33dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/default_shirt"
+        tools:layout_editor_absoluteY="209dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="149dp"
+        android:layout_height="176dp"
+        android:layout_marginEnd="65dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/default_shorts"
+        tools:layout_editor_absoluteY="209dp" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="103dp"
+        android:layout_height="119dp"
+        app:srcCompat="@drawable/lock"
+        tools:layout_editor_absoluteX="133dp"
+        tools:layout_editor_absoluteY="472dp" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="103dp"
+        android:layout_height="119dp"
+        app:srcCompat="@drawable/lock"
+        tools:layout_editor_absoluteX="133dp"
+        tools:layout_editor_absoluteY="650dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
