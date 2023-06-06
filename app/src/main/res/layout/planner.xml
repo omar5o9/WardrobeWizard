@@ -56,7 +56,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/navigationMenu">
+        android:layout_below="@id/navigationMenu"
+        android:layout_marginTop="-43dp">
 
         <!-- Planner content -->
         <LinearLayout
@@ -262,11 +263,10 @@
             <Button
                 android:id="@+id/saveButton"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-                android:layout_width="197dp"
+                android:layout_width="160dp"
                 android:layout_height="61dp"
                 android:background="@color/black"
                 android:backgroundTint="@color/black"
-                android:padding="16dp"
                 android:text="Save"
                 android:textColor="@color/white"
                 app:iconTint="@color/black"
@@ -275,11 +275,10 @@
             <Button
                 android:id="@+id/saveButton2"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-                android:layout_width="197dp"
+                android:layout_width="160dp"
                 android:layout_height="66dp"
                 android:background="@color/black"
                 android:backgroundTint="@color/black"
-                android:padding="16dp"
                 android:text="New Week"
                 android:textColor="@color/white"
                 app:iconTint="@color/black"

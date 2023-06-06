@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class pants extends AppCompatActivity {
     private TextView priceTextView;
     private EditText priceEditText;
     private Button addMoreButton;
+    private ImageButton home;
 
     // Database
     private FirebaseDatabase database;
@@ -56,6 +58,7 @@ public class pants extends AppCompatActivity {
         setContentView(R.layout.pants);
 
         // Initialize views
+        home =findViewById(R.id.homeButton);
         titleTextView = findViewById(R.id.titleTextView);
         allTextView = findViewById(R.id.allTextView);
         shirtsTextView = findViewById(R.id.shirtsTextView);
@@ -131,6 +134,15 @@ public class pants extends AppCompatActivity {
             public void onClick(View v) {
                 // Handle Shoes tab click
                 Intent intent = new Intent(pants.this, shoes.class);
+                startActivity(intent);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle Shirts tab click
+                Intent intent = new Intent(pants.this, homepage.class);
                 startActivity(intent);
             }
         });

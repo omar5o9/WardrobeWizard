@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7586F6">
+    android:background="#2236BF">
 
     <ImageView
         android:id="@+id/profileImageView"
@@ -35,10 +35,10 @@
         android:layout_marginBottom="8dp"
         android:text="Choose Photo"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/choosePhotoButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Choose Photo" />
 
@@ -52,10 +52,10 @@
         android:layout_marginBottom="2dp"
         android:text="Take Photo"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/takePhotoButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Take Photo" />
@@ -74,7 +74,7 @@
 
     <Button
         android:id="@+id/saveButton"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="95dp"
         android:layout_height="59dp"
         android:layout_marginStart="149dp"

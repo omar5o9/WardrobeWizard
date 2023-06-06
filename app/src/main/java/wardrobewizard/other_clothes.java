@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class other_clothes extends AppCompatActivity {
     private DatabaseReference itemsRef;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
+    private ImageButton home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class other_clothes extends AppCompatActivity {
         setContentView(R.layout.other);
 
         // Initialize views
+        home =findViewById(R.id.homeButton);
         titleTextView = findViewById(R.id.titleTextView);
         allTextView = findViewById(R.id.allTextView);
         shirtsTextView = findViewById(R.id.shirtsTextView);
@@ -106,6 +109,15 @@ public class other_clothes extends AppCompatActivity {
             public void onClick(View v) {
                 // Handle All tab click
                 Intent intent = new Intent(other_clothes.this, closet.class);
+                startActivity(intent);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle Shirts tab click
+                Intent intent = new Intent(other_clothes.this, homepage.class);
                 startActivity(intent);
             }
         });

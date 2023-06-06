@@ -98,6 +98,14 @@
     <!-- Sort Button -->
 
     <!-- Image Description Section -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/navigationBarLayout"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="0dp"
+        android:fillViewport="true">
+
     <LinearLayout
         android:id="@+id/imageDescriptionLayout"
         android:layout_width="match_parent"
@@ -108,26 +116,37 @@
         android:padding="16dp">
 
         <!-- Image View -->
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="85dp"
+            android:layout_height="61dp"
+            android:background="@color/white"
+            android:contentDescription="Home Button"
+            android:onClick="goToHomePage"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_home" />
 
         <TextView
             android:id="@+id/textView40"
-            android:layout_width="167dp"
-            android:layout_height="41dp"
+            android:layout_width="177dp"
+            android:layout_height="64dp"
             android:text="Hats And Accessories"
-            android:textSize="16sp" />
+            android:textSize="24sp" />
+
 
         <Button
             android:id="@+id/sortButton"
-            style="@android:style/Widget.DeviceDefault.Button.Borderless"
-            android:layout_width="107dp"
-            android:layout_height="36dp"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="250dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/black"
+            android:backgroundTint="@color/black"
             android:text="Sort"
-            android:textSize="12sp" />
+            android:textColor="@color/white" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -142,7 +161,7 @@
             android:id="@+id/factsEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter image facts"
+            android:hint="Enter image Description"
             android:maxLines="3" />
 
         <!-- Size Dropdown -->
@@ -181,7 +200,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Price"
-            android:textAlignment="center" />
+             />
 
         <EditText
             android:id="@+id/editTextText2"
@@ -191,17 +210,21 @@
             android:inputType="text"
             android:textSize="14sp" />
 
+        <Button
+            android:id="@+id/addMoreButton"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="100dp"
+            android:backgroundTint="@color/black"
+            android:text="Add More"
+            android:textColor="@color/white" />
+
+
     </LinearLayout>
 
-    <!-- Add More Button -->
-    <Button
-        android:id="@+id/addMoreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:onClick="addMoreClothingItem"
-        android:text="Add More" />
+</ScrollView>
 
 </RelativeLayout>

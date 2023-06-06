@@ -140,21 +140,19 @@
                 android:text="All Clothes"
                 android:textSize="16sp" />
 
+
             <Button
                 android:id="@+id/sortButton"
-                style="@android:style/Widget.Material.Light.Button.Toggle"
-                android:layout_width="107dp"
-                android:layout_height="36dp"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="250dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="@color/black"
-                android:backgroundTintMode="src_in"
+                android:backgroundTint="@color/black"
                 android:text="Sort"
-                android:textSize="12sp"
-                app:rippleColor="@color/black"
-                app:strokeColor="@color/black" />
+                android:textColor="@color/white" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -169,7 +167,7 @@
                 android:id="@+id/factsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter image facts"
+                android:hint="Enter image Description"
                 android:maxLines="3" />
 
             <!-- Size Dropdown -->
@@ -208,7 +206,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Price"
-                android:textAlignment="center" />
+                 />
 
             <EditText
                 android:id="@+id/editTextText2"
@@ -218,6 +216,7 @@
                 android:inputType="text"
                 android:textSize="14sp" />
 
+
             <Button
                 android:id="@+id/addMoreButton"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
@@ -226,8 +225,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="100dp"
-                android:onClick="addMoreClothingItem"
-                android:text="Add More" />
+                android:backgroundTint="@color/black"
+                android:text="Add More"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
