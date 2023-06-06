@@ -23,4 +23,7 @@
     <string name="planner">Planner</string>
     <string name="laundry">Laundry</string>
     <string name="stats">Stats</string>
+    <string name="size" />
+    <string name="Color" />
+    <string name="Style" />
 </resources>

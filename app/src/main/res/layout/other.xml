@@ -111,9 +111,9 @@
 
         <TextView
             android:id="@+id/textView40"
-            android:layout_width="93dp"
-            android:layout_height="29dp"
-            android:text="All Clothes"
+            android:layout_width="167dp"
+            android:layout_height="41dp"
+            android:text="Hats & Accessories"
             android:textSize="16sp" />
 
         <Button
@@ -135,7 +135,7 @@
             android:layout_height="200dp"
             android:onClick="goToImageDescriptionScreen"
             android:scaleType="centerCrop"
-            android:src="@drawable/shirt" />
+            android:src="@drawable/hat" />
 
         <!-- Image Facts -->
         <EditText

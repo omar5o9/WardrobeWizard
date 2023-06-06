@@ -112,8 +112,8 @@
         <TextView
             android:id="@+id/textView40"
             android:layout_width="93dp"
-            android:layout_height="29dp"
-            android:text="All Clothes"
+            android:layout_height="wrap_content"
+            android:text="Shoes"
             android:textSize="16sp" />
 
         <Button
@@ -134,8 +134,8 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:onClick="goToImageDescriptionScreen"
-            android:scaleType="centerCrop"
-            android:src="@drawable/shirt" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/shoe" />
 
         <!-- Image Facts -->
         <EditText

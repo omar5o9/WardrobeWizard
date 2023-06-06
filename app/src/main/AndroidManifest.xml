@@ -14,7 +14,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name="values.wardrobewizard.Login_Screen"
+            android:name="wardrobewizard.Login_Screen"
             android:exported="true">
 
             <!-- Remove the existing intent-filter -->
@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.open_page"
+            android:name="wardrobewizard.open_page"
             android:exported="true">
             <!-- Add the intent-filter to make open_page the launcher activity -->
             <intent-filter>
@@ -35,89 +35,107 @@
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.Register_Screen"
+            android:name="wardrobewizard.Register_Screen"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.Forgot_Password"
+            android:name="wardrobewizard.Forgot_Password"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.Change_Password"
+            android:name="wardrobewizard.Change_Password"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.homepage"
+            android:name="wardrobewizard.homepage"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.closet"
+            android:name="wardrobewizard.closet"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.add_clothes"
+            android:name="wardrobewizard.add_clothes"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.settings_screen"
+            android:name="wardrobewizard.settings_screen"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.outifit_creator"
+            android:name="wardrobewizard.outifit_creator"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.laundry_basket"
+            android:name="wardrobewizard.laundry_basket"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.calendar"
+            android:name="wardrobewizard.calendar"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.stats"
+            android:name="wardrobewizard.stats"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.delete_account"
+            android:name="wardrobewizard.delete_account"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.privacy_policy"
+            android:name="wardrobewizard.privacy_policy"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.service_terms"
+            android:name="wardrobewizard.service_terms"
             android:exported="true">
         </activity>
 
         <activity
-            android:name="values.wardrobewizard.ProfilePic"
+            android:name="wardrobewizard.ProfilePic"
             android:exported="true">
         </activity>
 
-        <activity android:name="values.wardrobewizard.LoadingScreen"
+        <activity android:name="wardrobewizard.LoadingScreen"
             android:exported="true">
         </activity>
 
-        <activity android:name="values.wardrobewizard.edit_profile"
+        <activity android:name="wardrobewizard.edit_profile"
             android:exported="true">
         </activity>
 
+        <activity android:name="wardrobewizard.Planner"
+            android:exported="true">
+        </activity>
 
+        <activity android:name="wardrobewizard.shirts"
+            android:exported="true">
+        </activity>
+
+        <activity android:name="wardrobewizard.other_clothes"
+            android:exported="true">
+        </activity>
+
+        <activity android:name="wardrobewizard.pants"
+            android:exported="true">
+        </activity>
+
+        <activity android:name="wardrobewizard.shoes"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

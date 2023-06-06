@@ -7,7 +7,7 @@
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
-    tools:context="values.wardrobewizard.privacy_policy">
+    tools:context=".wardrobewizard.privacy_policy">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
