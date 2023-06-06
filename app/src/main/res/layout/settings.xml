@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:itemHorizontalTranslationEnabled="false"
-        app:itemIconTint="@color/material_dynamic_secondary20"
+        app:itemIconTint="@color/black"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

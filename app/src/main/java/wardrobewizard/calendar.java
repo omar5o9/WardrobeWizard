@@ -10,29 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.wardrobewizard.R;
+
 public class calendar extends AppCompatActivity {
-/*
-    private CalendarView calendarView;
-
-    public calendar() {
-        // Required empty public constructor
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.calendar);
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.calendar, container, false);
-
-        calendarView = view.findViewById(R.id.calendarView);
-
-        // Handle clicking on a day in the calendar
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                // Navigate back to the planner for the selected week
-            }
-        });
-
-        return view;
-    }*/
 }
+
