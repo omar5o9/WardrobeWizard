@@ -125,7 +125,7 @@
             android:contentDescription="Home Button"
             android:onClick="goToHomePage"
             android:padding="8dp"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_home" />
 
         <TextView
