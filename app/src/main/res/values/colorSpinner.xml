@@ -2,6 +2,7 @@
 <resources>
     <!-- Color Options -->
     <string-array name="Color">
+        <item>Color</item>
         <item>Red</item>
         <item>Black</item>
         <item>Blue</item>

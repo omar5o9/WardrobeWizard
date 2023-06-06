@@ -98,6 +98,14 @@
     <!-- Sort Button -->
 
     <!-- Image Description Section -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/navigationBarLayout"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="0dp"
+        android:fillViewport="true">
+
     <LinearLayout
         android:id="@+id/imageDescriptionLayout"
         android:layout_width="match_parent"
@@ -108,6 +116,16 @@
         android:padding="16dp">
 
         <!-- Image View -->
+
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="84dp"
+            android:layout_height="71dp"
+            android:background="@color/white"
+            android:contentDescription="Home Button"
+            android:onClick="goToHomePage"
+            android:padding="8dp"
+            android:src="@drawable/ic_home" />
 
         <TextView
             android:id="@+id/textView40"
@@ -190,18 +208,18 @@
             android:ems="10"
             android:inputType="text"
             android:textSize="14sp" />
+        <Button
+            android:id="@+id/addMoreButton"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="100dp"
+            android:onClick="addMoreClothingItem"
+            android:text="Add More" />
 
     </LinearLayout>
 
-    <!-- Add More Button -->
-    <Button
-        android:id="@+id/addMoreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:onClick="addMoreClothingItem"
-        android:text="Add More" />
-
+</ScrollView>
 </RelativeLayout>

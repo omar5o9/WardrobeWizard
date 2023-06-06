@@ -138,7 +138,7 @@ public class User {
             this.profilePicUrl = url;
         } else {
             // Handle the case when the profile picture URL is null
-            this.profilePicUrl = "https://storage.googleapis.com/wardrobe-wizard-8fe58.appspot.com/funnypic.jpg";
+            this.profilePicUrl = "https://firebasestorage.googleapis.com/v0/b/wardrobe-wizard-8fe58.appspot.com/o/funnypic.jpg?alt=media&token=5e592042-bd91-42d0-9ff3-c2046a115ca4";
         }
     }
 

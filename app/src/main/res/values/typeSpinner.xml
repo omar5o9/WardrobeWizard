@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Style">
+        <item>Style</item>
         <item>Pants</item>
         <item>Shirt</item>
         <item>Shoes</item>
