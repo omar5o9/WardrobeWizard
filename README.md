@@ -24,7 +24,7 @@ Directory Structure: \
         >>> main/ \
           >>>> java/com/example/wardrobewizard  --                             This is where all the java files are kept \
           >>>> test/java/com/example/wardrobewizard       --                   This is where unit tests for the java files are kept  \ 
-          >>>> res/ \
+          >>>> res/
               >>>>> layout                        --                            This is where all the xml files for the pages of the app are kept \
               >>>>> drawable                        --                          This is where all the image files for the app's pages are kept \
               >>>>> mipmap-anydpi-v26 \
