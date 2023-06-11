@@ -20,7 +20,7 @@ Run 'git clone https://github.com/omar5o9/WardrobeWizard' in your favorite comma
 Directory Structure: \
 > WardrobeWizard/                                       --                  The parent directory 
   >> app/src/ \
-  >> gradle/wrapper                                   --                            Gradle dependencies are kept here
+  >> gradle/wrapper                                   --                            Gradle dependencies are kept here \
         >>> main/ \
           >>>> java/com/example/wardrobewizard  --                             This is where all the java files are kept \
           >>>> test/java/com/example/wardrobewizard       --                   This is where unit tests for the java files are kept \ 
