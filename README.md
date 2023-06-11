@@ -17,11 +17,11 @@ Cameron Zamora: Back-end
 How to obtain the source code:
 Run 'git clone https://github.com/omar5o9/WardrobeWizard' in your favorite command line interface
 
-Directory Structure:
-WardrobeWizard/                                                         The parent directory\n
+Directory Structure: \
+WardrobeWizard/                                                         The parent directory \
   app/src/
         main/
-          java/com/example/wardrobewizard                               This is where all the java files are kept\n
+          java/com/example/wardrobewizard                               This is where all the java files are kept \
           res/
               layout                                                    This is where all the xml files for the pages of the app are kept
               drawable                                                  This is where all the image files for the app's pages are kept
