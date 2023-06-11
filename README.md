@@ -22,7 +22,8 @@ Directory Structure: \
   >> app/src/ \
   >> gradle/wrapper                                   --                            Gradle dependencies are kept here
         >>> main/ \
-          >>>> java/com/example/wardrobewizard  --                             This is where all the java files are kept \
+          >>>> java/com/example/wardrobewizard  --                             This is where all the java files are kept 
+          >>>> test/java/com/example/wardrobewizard       --                   This is where unit tests for the java files are kept 
           >>>> res/ 
               >>>>> layout                        --                            This is where all the xml files for the pages of the app are kept \
               >>>>> drawable                        --                          This is where all the image files for the app's pages are kept \
@@ -37,7 +38,6 @@ Directory Structure: \
               >>>>> values-night \
               >>>>> values \
               >>>>> xml \
-          >>>> test/java/com/example/wardrobewizard       --                   This is where unit tests for the java files are kept 
     
 How to build the software: 
 
