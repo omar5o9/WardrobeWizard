@@ -14,8 +14,7 @@ Beighlor Martinez: Front-end
 Roberto Suarez: Front-end
 Cameron Zamora: Back-end
 
-How to obtain the source code:
-Run 'git clone https://github.com/omar5o9/WardrobeWizard' in your favorite command line interface
+How to obtain the source code: Run 'git clone https://github.com/omar5o9/WardrobeWizard' in your favorite command line interface
 
 Directory Structure: \
 > WardrobeWizard/                                       --                  The parent directory 
@@ -39,8 +38,11 @@ Directory Structure: \
               >>>>> values \
               >>>>> xml 
     
-How to build the software: 
+How to build the software: In Android Studio, click 'File', then 'New', then 'Import Project'. In the window that appears, navigate to the root directory 
+of the project you want to import. Click 'OK'. Finally, click the 'Build' icon in the toolbar.
 
-How to test the software:
+How to run the software: In the toolbar, select your app from the run configurations menu. In the target device menu, select the Pixel 3 virtual machine. 
+Click 'run'.
 
-How to run the software:
+How to test the software: Run the software. For each page you wish to test, visit that page in the virtual machine. To add new unit tests, save them to: 
+WardrobeWizard/app/src/test/java/com/example/wardrobewizard. The filenames are to be written in PascalCase.
