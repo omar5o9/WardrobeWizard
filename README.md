@@ -14,7 +14,7 @@ Front end: Beighlor Martinez and Roberto Suarez
 
 How to obtain the source code: Run 'git clone https://github.com/omar5o9/WardrobeWizard' in your favorite command line interface
 
-Directory Structure: \
+Directory Structure:
 > WardrobeWizard/                                       --                  The parent directory 
   >> app/src/ \
   >> gradle/wrapper                                   --                            Gradle dependencies are kept here \
