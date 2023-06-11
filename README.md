@@ -8,11 +8,9 @@ and a laundry basket system. The outfit system will allow users to make sets of 
 profile. The laundry basket system will allow users to mark clothing as previously worn so they remember not to wear it again, and provide statistics of 
 how often they wear a piece of clothing.
 
-Team:
-Omar Facundo: Back-end
-Beighlor Martinez: Front-end
-Roberto Suarez: Front-end
-Cameron Zamora: Back-end
+Team: \
+Back-end: Omar Facundo and Cameron Zamora \ 
+Front end: Beighlor Martinez and Roberto Suarez \
 
 How to obtain the source code: Run 'git clone https://github.com/omar5o9/WardrobeWizard' in your favorite command line interface
 
