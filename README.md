@@ -9,7 +9,7 @@ profile. The laundry basket system will allow users to mark clothing as previous
 how often they wear a piece of clothing.
 
 Team: \
-Back-end: Omar Facundo and Cameron Zamora \ 
+Back-end: Omar Facundo and Cameron Zamora \
 Front end: Beighlor Martinez and Roberto Suarez \
 
 How to obtain the source code: Run 'git clone https://github.com/omar5o9/WardrobeWizard' in your favorite command line interface
