@@ -37,7 +37,7 @@ Directory Structure: \
               >>>>> navigation \
               >>>>> values-night \
               >>>>> values \
-              >>>>> xml \
+              >>>>> xml 
     
 How to build the software: 
 
