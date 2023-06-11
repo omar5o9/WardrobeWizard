@@ -19,26 +19,26 @@ Run 'git clone https://github.com/omar5o9/WardrobeWizard' in your favorite comma
 
 Directory Structure: \
 WardrobeWizard/                                                         The parent directory \
-  app/src/ \
-        main/ \
-          java/com/example/wardrobewizard                               This is where all the java files are kept \
-          res/ \
-              layout                                                    This is where all the xml files for the pages of the app are kept \
-              drawable                                                  This is where all the image files for the app's pages are kept \
-              mipmap-anydpi-v26 \
-              mipmap-hdpi \
-              mipmap-mdpi \
-              mipmap-xhdpi \
-              mipmap-xxhdpi \
-              mipmap-xxxhdpi \
-              menu \
-              navigation \
-              values-night \
-              values \
-              xml \
-          test/java/com/example/wardrobewizard                          This is where unit tests for the java files are kept \
-  gradle/                                                               Gradle dependencies are kept here \
-    wrapper/ \
+  > app/src/ \
+        >> main/ \
+          >>> java/com/example/wardrobewizard                               This is where all the java files are kept \
+          >>> res/ \
+              >>>> layout                                                    This is where all the xml files for the pages of the app are kept \
+              >>>> drawable                                                  This is where all the image files for the app's pages are kept \
+              >>>> mipmap-anydpi-v26 \
+              >>>> mipmap-hdpi \
+              >>>> mipmap-mdpi \
+              >>>> mipmap-xhdpi \
+              >>>> mipmap-xxhdpi \
+              >>>> mipmap-xxxhdpi \
+              >>>> menu \
+              >>>> navigation \
+              >>>> values-night \
+              >>>> values \
+              >>>> xml \
+          >>> test/java/com/example/wardrobewizard                          This is where unit tests for the java files are kept \
+  > gradle/                                                               Gradle dependencies are kept here \
+    >> wrapper/ \
     
 How to build the software: 
 
