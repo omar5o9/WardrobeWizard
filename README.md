@@ -18,8 +18,9 @@ How to obtain the source code:
 Run 'git clone https://github.com/omar5o9/WardrobeWizard' in your favorite command line interface
 
 Directory Structure: \
-> WardrobeWizard/                                                         The parent directory \
+> WardrobeWizard/                                                         The parent directory 
   >> app/src/ \
+  >> gradle/wrapper                                                               Gradle dependencies are kept here
         >>> main/ \
           >>>> java/com/example/wardrobewizard                               This is where all the java files are kept \
           >>>> res/ \
@@ -36,9 +37,7 @@ Directory Structure: \
               >>>>> values-night \
               >>>>> values \
               >>>>> xml \
-          >>>> test/java/com/example/wardrobewizard                          This is where unit tests for the java files are kept \
-  >> gradle/                                                               Gradle dependencies are kept here \
-    >>> wrapper/ 
+          >>>> test/java/com/example/wardrobewizard                          This is where unit tests for the java files are kept 
     
 How to build the software: 
 
